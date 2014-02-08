@@ -139,6 +139,8 @@ if has("clipboard")
   endif 
 endif 
 
+" クリップボードとヤンクの共有
+"set clipboard=unnamedplus
 
 " 挿入モード終了時に IME 状態を保存しない
 inoremap <silent> <Esc> <Esc>
