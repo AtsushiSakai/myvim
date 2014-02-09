@@ -71,12 +71,11 @@ syntax on
 "検索時に大文字を含んでいたら大/小を区別
 set ignorecase smartcase
 
-".svn,.gitはgrepしない
+".svn,.gitはgrepしない 内部greoのみ
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git
 
-" vimgrep時に自動でQuickFixを開く設定
-"au QuickfixCmdPost vimgrep cw
-au QuickfixCmdPost vimgrep copen
+" vimgrep時に自動で別のタブでQuickFixを開く設定
+au QuickfixCmdPost vimgrep | tabnew | cw 
 
 " grepとタイプするだけでvimgrepを使う設定
 command! -complete=file -nargs=+ G call s:grep([<f-args>])
@@ -85,6 +84,10 @@ function! s:grep(args)
     execute 'vimgrep' '/' . a:args[0] . '/j ' . target
     if len(getqflist()) != 0 | copen | endif
 endfunction
+
+" grでカーソル下のキーワードをvimgrep
+nnoremap <expr> gr ':vimgrep /\<' . expand('<cword>') . '\>/j **/*.' . expand('%:e')
+
 
 " 閉じ括弧を表示した時に，対応する括弧を表示する
 set showmatch
@@ -108,6 +111,7 @@ set wildmenu
 
 " テキスト挿入中の自動折り返しを日本語に対応させる
 set formatoptions+=mM
+
 " タイトルを表示
 set title
 set tabstop=2
@@ -120,10 +124,14 @@ let $ROS_ROOT="/opt/ros/fuerte/include"
 set path+=$ROS_ROOT
 
 "<F2> コメントヘッダを挿入
-nmap <F2> <ESC>i<C-R>\/*<CR><CR>FileName: <C-R>=expand("%")<CR><CR><CR>Discription: <CR><CR>Author: Atsushi Sakai <CR>*/<ESC>
+nmap <F2> <ESC>i<C-R>\/*<CR><CR>@file: <C-R>=expand("%")<CR><CR><CR>@brief: <CR><CR>@author: Atsushi Sakai <CR>*/<ESC>
 
 "<F3> TODOを検索
-noremap <F3> <ESC>:vimgrep /TODO/j **/*.cpp **/*.h **/*.py<CR>:cw<CR>
+noremap <F3> <ESC>:vimgrep /TODO/ **/*.cpp **/*.h **/*.py<CR>:cw<CR>
+
+"<F4> 関数ヘッダを挿入
+nmap <F4> <ESC>i<C-R>\/**<CR>* @brief: <CR>*/<ESC>
+
 
 "<F6>  タイムスタンプを挿入
 nmap <F6> <ESC>i<C-R>=strftime("%Y/%m/%d")<CR>
@@ -138,9 +146,6 @@ if has("clipboard")
     set clipboard^=unnamed 
   endif 
 endif 
-
-" クリップボードとヤンクの共有
-"set clipboard=unnamedplus
 
 " 挿入モード終了時に IME 状態を保存しない
 inoremap <silent> <Esc> <Esc>
@@ -157,16 +162,58 @@ set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
 
-
-" grでカーソル下のキーワードをvimgrep
-nnoremap <expr> gr ':vimgrep ;'j . expand('<cword>') . '; **/*.cpp **/*.h **/*.py'
-
-" tnで新しいタブを作る
-noremap tn :<C-u>tabnew ./<CR>
-
 "colorscheme darkblue
 " launchファイルのカラースキームをxmlと一緒にする。
 autocmd BufNewFile,BufRead *.launch set filetype=xml
+
+
+"==========タブ関係===========
+"Anywhere SID.
+function! s:SID_PREFIX()
+  return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
+endfunction
+
+  " Set tabline.
+function! s:my_tabline()  "{{{
+  let s = ''
+  for i in range(1, tabpagenr('$'))
+    let bufnrs = tabpagebuflist(i)
+    let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
+    let no = i  " display 0-origin tabpagenr.
+    let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
+    let title = fnamemodify(bufname(bufnr), ':t')
+    let title = '[' . title . ']'
+    let s .= '%'.i.'T'
+    let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
+    let s .= no . ':' . title
+    let s .= mod
+    let s .= '%#TabLineFill# '
+  endfor
+  let s .= '%#TabLineFill#%T%=%#TabLine#'
+  return s
+endfunction "}}}
+let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
+set showtabline=2 " 常にタブラインを表示
+
+" The prefix key.
+nnoremap    [Tag]   <Nop>
+nmap t [Tag]
+" Tab jump
+for n in range(1, 9)
+    execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
+endfor
+" t1 で1番左のタブ、t2 で1番左から2番目のタブにジャンプ
+
+map <silent> [Tag]c :tablast <bar> tabnew ./<CR>
+" tc 新しいタブを一番右に作る
+map <silent> [Tag]x :tabclose<CR>
+" tx タブを閉じる
+map <silent> [Tag]n :tabnext<CR>
+" tn 次のタブ
+map <silent> [Tag]p :tabprevious<CR>
+" tp 前のタブ
+
+
 
 "========複数行コメント用=======
 " Comment or uncomment lines from mark a to mark b.
