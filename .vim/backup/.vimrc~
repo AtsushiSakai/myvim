@@ -50,6 +50,14 @@ inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
 "========================
 
 
+" 波線で表示する場合は、以下の設定を行う
+" エラーを赤字の波線で
+"let g:hier_highlight_group_qf  = hier_highlight_group_qfw
+
+" 警告を青字の波線で
+"let g:hier_highlight_group_qfw = "qf_warning_ucurl"
+
+
 "インクリメンタルサーチ
 set incsearch
 set hlsearch

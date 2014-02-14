@@ -1,0 +1,200 @@
+/** 
+ * @file mRPCEmulator.cpp
+ *
+ * @brief 擬似RPC通信を実現するノード
+ *
+ * @author Atsushi Sakai
+ */
+
+#include "ros/ros.h"
+#include <iostream>
+#include "../../../Tools/mRPC.h"  //RPC通信用
+
+#include "SubscribeLib.h"  //トピック受信用
+
+//mRPC用カスタムメッセージ
+#include "mRPCEmulator/mRPCFrame.h"
+#include "mRPCEmulator/mRPCPacket.h"
+
+using namespace std;
+
+//=========Global Variable=======
+string NODE_NAME="mRPCEmulator";
+
+//Topic受信用
+SubVirtualmRPC recDriveCANA;
+SubVirtualmRPC recDriveCANB;
+
+/**
+ *  @brief CANEmulatorノードのメインクラス
+ */
+class Node{
+  public:
+    Node(){
+      n_  = new ros::NodeHandle;//ノードハンドラ
+    }
+    ~Node(){
+      delete n_;
+    }
+
+    void main(){
+      SetPublisherAndSubscriber();
+      ros::Rate loopRate(20);
+      //ros::Rate loopRate=GetLoopRate();//実行周期取得
+
+      //RPC通信オブジェクトの生成(CAN通信の初期化)
+      mRPC canA("Ch1","500k");
+      CANInitAndCheck(canA);
+      mRPC canB("Ch2","500k");
+      CANInitAndCheck(canB);
+
+      while (ros::ok()){
+        ROS_INFO_STREAM(NODE_NAME<<" Drive NCANA:"<<recDriveCANA.GetNFrames()
+                                 <<" Drive NCANB:"<<recDriveCANB.GetNFrames());
+
+
+        //リアルCANの受信
+        /*
+        ReadRealCAN(canA);
+
+        packetSize=packetMsg_.packet.size();
+        packetMsg_.header.stamp=ros::Time::now();//時刻セット
+        pubCANPacket_.publish(packetMsg_);
+        packetMsg_.packet.clear();//DB初期化
+        */
+
+        //リアルCANの送信
+        SendRealCAN(canA,recDriveCANA);
+        SendRealCAN(canB,recDriveCANB);
+
+        Diagnosis();
+        ros::spinOnce();	//check for incoming message
+        loopRate.sleep();
+      }
+    }
+
+  private:
+    //=====メンバ変数=====
+    ros::NodeHandle *n_;  //ノード管理+パラメータサーバ用用
+    //CANEmulator::CANPacket packetMsg_;
+    
+    //Publisher
+    ros::Publisher pubCANPacket_;
+
+    //SubScriver
+    ros::Subscriber subDriveRPC_CAN_A;
+    ros::Subscriber subDriveRPC_CAN_B;
+
+    //=====メンバ関数=====
+
+    /**
+     * @brief 仮想CANのデータを実際のCAN busに送信する関数
+     */
+    void SendRealCAN(mRPC &can, SubVirtualmRPC &rec){
+
+      int nPkt=rec.GetNFrames();//フレーム数
+
+      //受信したフレームをUSBCANで送信
+      for(int ifr=0;ifr<nPkt;ifr++){
+        mRPC::RPCData rpc;
+        rpc.prior   =rec.pkt.packet[ifr].prior;
+        rpc.src     =rec.pkt.packet[ifr].src;
+        rpc.RPCNo   =rec.pkt.packet[ifr].RPCNo;
+        rpc.dest    =rec.pkt.packet[ifr].dest;
+        rpc.needAck =rec.pkt.packet[ifr].needAck;
+
+        int ndata=rec.pkt.packet[ifr].data.size();
+        for(int id=0;id<ndata;id++){
+          rpc.data.push_back(rec.pkt.packet[ifr].data[id]);
+        }
+
+        can.SendRPC(rpc);//RPCの送信
+      }
+    }
+
+    /**
+     *  @brief USB CANからリアルなCANのデータを読む関数
+     */
+    /*
+    void ReadRealCAN(kvaser &can){
+      CANEmulator::CANFrame frame;
+      long id;//idの指定
+      vector<uchar> msg;
+
+      //バッファが空になるまで読む
+      while(can.Read(id,msg)){
+        //cout<<id<<endl;
+        //can.ShowMsg(msg,"hex");
+
+        //Topic用のデータに変換
+        //TODO 変換を無くしたい
+        frame.id=id;
+        for(int i=0;i<(int)msg.size();i++){
+          frame.data[i]=(uint8_t)msg[i];
+        }
+
+        //topic送信用データに格納
+        packetMsg_.packet.push_back(frame);
+      }
+    }
+    */
+
+    /**
+     *  @brief CANを初期化して、チェックする関数
+     */
+    void CANInitAndCheck(mRPC &can){
+      if(can.GetInitStatus()){//ステータスチェック
+        ROS_INFO_STREAM("CAN open success:"<<can.GetChannelNum());
+      }
+      else{
+        ROS_FATAL_STREAM("CAN open fail:"<<can.GetErrorMsg());exit(2);//終了
+      }
+    }
+
+
+    /**
+     *  @brief ダイアグノシス
+     */
+    void Diagnosis(void){
+      //データ受信のダイアグノシス
+      recDriveCANA.ReceiveDiagnosis("recDriveCANA");
+      recDriveCANB.ReceiveDiagnosis("recDriveCANB");
+    }
+
+    /**
+     *  @brief PublisherとSubscriberのトピック名と型を設定する関数
+     */
+    void SetPublisherAndSubscriber(){
+      //=====Publisher=====
+
+      //=====Subscriber=====
+      subDriveRPC_CAN_A=n_->subscribe("/Drive/RPC/CAN_A",100,
+                            &SubVirtualmRPC::CallBack,&recDriveCANA);
+      subDriveRPC_CAN_B=n_->subscribe("/Drive/RPC/CAN_B",100,
+                            &SubVirtualmRPC::CallBack,&recDriveCANB);
+
+    }
+
+    /**
+     *  @brief ループの周期をパラメータサーバから取得する関数
+     */
+    ros::Rate GetLoopRate(){
+      double loopRate=0.0;
+      n_->getParam("/"+NODE_NAME+"/loop_rate",loopRate);
+      ROS_INFO_STREAM("loop_rate:"<<loopRate<<"[Hz]");
+      if(loopRate==0.0){
+        ROS_FATAL_STREAM("[GetLoopRate] Cannot get param data");
+        exit(0);//プログラム終了
+      }
+      ros::Rate loop_rate(loopRate);
+      return loop_rate;
+    }
+};
+
+int main(int argc, char **argv){
+  ros::init(argc, argv, NODE_NAME);//ノード名を設定
+  Node node;
+  node.main();//メインループ
+  return 0;
+}
+

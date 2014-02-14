@@ -1,0 +1,132 @@
+#!/usr/bin/env python
+#-*- coding:utf-8 -*-
+#    
+# @file: CMakeListsGenerator.py
+# 
+# @brief: 
+# 
+# @author: Atsushi Sakai 
+# 
+
+import os
+
+def main():
+  f=open("CMakeLists.txt","w");
+
+  HeaderWrite(f)
+
+  IncludeWrite("../src/",f)
+
+  LibraryWrite("../../pseudoNGIOS/src/",f)
+  LibraryWrite("../src/",f)
+
+  FooterWrite(f)
+
+  print("Done !!")
+
+#
+# @brief インクルードファイル用コードの書き込み
+#
+def IncludeWrite(topDir,f):
+  dirList=[]
+  for file in fild_all_files(topDir):
+    notSvn=file.find("svn")==-1#svnファイルは除く
+    isH   =file.find(".h")!=-1 #.hファイルか
+    if notSvn & isH:
+        #print file
+        text="include_directories("
+        text+=file[3:file.rfind("/")]
+        text+=")\n"
+        dirList.append(text)
+
+  #重複を除去し,ソートして書き込み
+  for dirc in sorted(list(set(dirList))):
+    f.write(dirc)
+
+  f.write("\n");#一行空ける
+
+
+#
+# @brief ライブラリリンク用コードの書き込み
+#
+def LibraryWrite(topDir,f):
+  libList=[]
+  for file in fild_all_files(topDir):
+    notSvn=file.find("svn")==-1 #svnファイルは除く
+    isC   =file.find(".c")!=-1  #Cファイルであるか
+    isCpp =file.find(".cpp")==-1#Cppファイルは除く
+    if notSvn & isC & isCpp:
+        #print file
+        text="rosbuild_add_library(App "
+        text+=file[3:]
+        text+=")\n"
+        libList.append(text)
+
+  #ソートして書き込み
+  for lib in sorted(libList):
+    f.write(lib);
+
+  f.write("\n");#一行空ける
+
+#
+# @brief ディレクトリツリーのファイル名を取得する関数
+#
+def fild_all_files(directory):
+  for root, dirs, files in os.walk(directory):
+    yield root
+    for file in files:
+      yield os.path.join(root, file)
+
+#
+# @brief フッター書き込み用関数
+#
+def FooterWrite(f):
+  text="rosbuild_add_executable(Drive src/CREmulator.cpp)\n";
+  text+="target_link_libraries(Drive App)\n"
+  f.write(text)
+
+  f.write("\n");#一行空ける
+
+#
+# @brief ヘッダの書き込み
+#
+def HeaderWrite(f):
+
+  text=\
+"cmake_minimum_required(VERSION 2.4.6)\n\
+\n\
+# Set the build type.  Options are:\n\
+#  Coverage       : w/ debug symbols, w/o optimization, w/ code-coverage\n\
+#  Debug          : w/ debug symbols, w/o optimization\n\
+#  Release        : w/o debug symbols, w/ optimization\n\
+#  RelWithDebInfo : w/ debug symbols, w/ optimization\n\
+#  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries\n\
+#set(ROS_BUILD_TYPE RelWithDebInfo)\n\
+\n\
+rosbuild_init()\n\
+\n\
+#set the default path for built executables to the \"bin\" directory\n\
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)\n\
+#set the default path for built libraries to the \"lib\" directory\n\
+set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)\n\
+\n\
+#uncomment if you have defined messages\n\
+#rosbuild_genmsg()\n\
+#uncomment if you have defined services\n\
+#rosbuild_gensrv()\n\
+\n\
+#common commands for building c++ executables and libraries\n\
+#rosbuild_add_library(${PROJECT_NAME} src/example.cpp)\n\
+#target_link_libraries(${PROJECT_NAME} another_library)\n\
+#rosbuild_add_boost_directories()\n\
+#rosbuild_link_boost(${PROJECT_NAME} thread)\n\
+#rosbuild_add_executable(example examples/example.cpp)\n\
+#target_link_libraries(example ${PROJECT_NAME})\n\
+\n\
+#rosbuild_add_executable(CREmulator src/user/main/AppMain.c src/CREmulator.cpp)\n\
+\n"
+
+  f.write(text);
+
+
+main()
