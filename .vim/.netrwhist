@@ -1,11 +1,4 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/opt/ros/fuerte/bin'
-let g:netrw_dirhist_2='/opt/ros/fuerte'
-let g:netrw_dirhist_3='/opt/ros/fuerte/lib'
-let g:netrw_dirhist_4='/opt/ros/fuerte'
-let g:netrw_dirhist_5='/opt/ros/fuerte/share'
-let g:netrw_dirhist_6='/opt/ros/fuerte/share/roscpp_core'
-let g:netrw_dirhist_7='/opt/ros/fuerte/share'
-let g:netrw_dirhist_8='/opt/ros/fuerte'
-let g:netrw_dirhist_9='/home/atsushisakai/myvim'
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='/home/atsushisakai/myvim/.vim'
+let g:netrw_dirhist_2='/home/atsushisakai/myvim'

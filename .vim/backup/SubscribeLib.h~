@@ -43,7 +43,7 @@ class SubVirtualmRPC{
     /**
      * @brief:データ受信ダイアグノシス
      */
-    void ReceiveDiagnosis(const string Name){
+    void ReceiveDiagnosis(const string Name) const {
       //取得時間確認
       ros::Duration dt=ros::Time::now()-getTime_;
 
@@ -55,7 +55,7 @@ class SubVirtualmRPC{
     /**
      * @brief 受信したデータの点数を取得する関数
      */
-    int GetNFrames(void){return pkt.packet.size();}
+    int GetNFrames(void) const {return pkt.packet.size();}
 
   private:
     double DT_TH_;//受信間隔ダイアグノシス用閾値
