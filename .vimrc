@@ -57,6 +57,9 @@ set ignorecase
 set smartcase
 set wrapscan
 
+"ペースト時に階段上にしない。
+set pastetoggle=
+
 "シンタックスオン
 syntax on
 
