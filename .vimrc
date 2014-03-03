@@ -72,9 +72,6 @@ set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git
 " vimgrep時に自動で別のタブでQuickFixを開く設定
 au QuickfixCmdPost vimgrep | tabnew | cw
 
-"makeしてQuickFixを開く設定
-au QuickfixCmdPost make | copen 
-
 " grepとタイプするだけでvimgrepを使う設定
 command! -complete=file -nargs=+ G call s:grep([<f-args>])
 function! s:grep(args)
