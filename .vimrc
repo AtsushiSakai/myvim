@@ -66,7 +66,7 @@ syntax on
 "検索時に大文字を含んでいたら大/小を区別
 set ignorecase smartcase
 
-".svn,.gitはgrepしない 内部greoのみ
+".svn,.gitはgrepしない 内部grepのみ
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git
 
 " vimgrep時に自動で別のタブでQuickFixを開く設定
