@@ -30,11 +30,12 @@ if neobundle#exists_not_installed_bundles()
 endif
 
 "====インストールするプラグイン=====
-
+"追加したらNeoBundleInstallすること
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'https://github.com/vim-scripts/SingleCompile'
 NeoBundle 'cohama/vim-hier'
+NeoBundle 'ompugao/ros.vim'
 
 "======neocomplcacheの設定
 " 補完ウィンドウの設定
@@ -49,6 +50,8 @@ inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
 
 "========================
 
+"インデントによる折りたたみをONする
+set foldmethod=indent
 
 "インクリメンタルサーチ
 set incsearch
@@ -157,10 +160,6 @@ set encoding=utf-8
 "set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
 set fileencoding=utf-8
 
-"colorscheme darkblue
-" launchファイルのカラースキームをxmlと一緒にする。
-autocmd BufNewFile,BufRead *.launch set filetype=xml
-
 
 "==========タブ関係===========
 "Anywhere SID.
@@ -251,3 +250,9 @@ nnoremap <Leader>c <Esc>:set opfunc=DoCommentOp<CR>g@
 nnoremap <Leader>C <Esc>:set opfunc=UnCommentOp<CR>g@
 vnoremap <Leader>c <Esc>:call CommentMark(1,'<','>')<CR>
 vnoremap <Leader>C <Esc>:call CommentMark(0,'<','>')<CR>
+
+"========ROS=======
+
+" launchファイルのカラースキームをxmlと一緒にする。
+autocmd BufNewFile,BufRead *.launch set filetype=xml
+
