@@ -6,7 +6,7 @@
 :NeoBundleDirectInstall	neobundle.txt	/*:NeoBundleDirectInstall*
 :NeoBundleDisable	neobundle.txt	/*:NeoBundleDisable*
 :NeoBundleDocs	neobundle.txt	/*:NeoBundleDocs*
-:NeoBundleEditExtra	neobundle.txt	/*:NeoBundleEditExtra*
+:NeoBundleExtraEdit	neobundle.txt	/*:NeoBundleExtraEdit*
 :NeoBundleFetch	neobundle.txt	/*:NeoBundleFetch*
 :NeoBundleInstall	neobundle.txt	/*:NeoBundleInstall*
 :NeoBundleInstall!	neobundle.txt	/*:NeoBundleInstall!*
@@ -105,10 +105,13 @@ g:neobundle#install_max_processes	neobundle.txt	/*g:neobundle#install_max_proces
 g:neobundle#install_process_timeout	neobundle.txt	/*g:neobundle#install_process_timeout*
 g:neobundle#log_filename	neobundle.txt	/*g:neobundle#log_filename*
 g:neobundle#rm_command	neobundle.txt	/*g:neobundle#rm_command*
+g:neobundle#types#git#command_path	neobundle.txt	/*g:neobundle#types#git#command_path*
 g:neobundle#types#git#default_protocol	neobundle.txt	/*g:neobundle#types#git#default_protocol*
 g:neobundle#types#git#enable_submodule	neobundle.txt	/*g:neobundle#types#git#enable_submodule*
+g:neobundle#types#hg#command_path	neobundle.txt	/*g:neobundle#types#hg#command_path*
 g:neobundle#types#hg#default_protocol	neobundle.txt	/*g:neobundle#types#hg#default_protocol*
 g:neobundle#types#raw#calc_hash_command	neobundle.txt	/*g:neobundle#types#raw#calc_hash_command*
+g:neobundle#types#svn#command_path	neobundle.txt	/*g:neobundle#types#svn#command_path*
 g:neobundle_default_git_protocol	neobundle.txt	/*g:neobundle_default_git_protocol*
 g:neobundle_default_hg_protocol	neobundle.txt	/*g:neobundle_default_hg_protocol*
 g:neobundle_default_site	neobundle.txt	/*g:neobundle_default_site*
@@ -184,6 +187,7 @@ g:unite_source_neobundle_install_max_processes	neobundle.txt	/*g:unite_source_ne
 include_complete	neocomplcache.txt	/*include_complete*
 member_complete	neocomplcache.txt	/*member_complete*
 neobundle	neobundle.txt	/*neobundle*
+neobundle#bundle()	neobundle.txt	/*neobundle#bundle()*
 neobundle#call_hook()	neobundle.txt	/*neobundle#call_hook()*
 neobundle#config()	neobundle.txt	/*neobundle#config()*
 neobundle#exists_not_installed_bundles()	neobundle.txt	/*neobundle#exists_not_installed_bundles()*

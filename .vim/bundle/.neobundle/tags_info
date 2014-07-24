@@ -1,4 +1,5 @@
 SingleCompile
 neobundle.vim
 neocomplcache
+ros.vim
 vim-hier
