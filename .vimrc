@@ -49,10 +49,6 @@ inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
 
 "========================
-
-"インデントによる折りたたみをONする
-set foldmethod=indent
-
 "インクリメンタルサーチ
 set incsearch
 set hlsearch
@@ -219,8 +215,6 @@ map <silent> [Tag]n :tabnext<CR>
 map <silent> [Tag]p :tabprevious<CR>
 " tp 前のタブ
 
-
-
 "========複数行コメント用=======
 " Comment or uncomment lines from mark a to mark b.
 function! CommentMark(docomment, a, b)
@@ -264,6 +258,8 @@ vnoremap <Leader>c <Esc>:call CommentMark(1,'<','>')<CR>
 vnoremap <Leader>C <Esc>:call CommentMark(0,'<','>')<CR>
 
 "========ROS=======
+"ROSのトピックのリストを表示する
+source ~/.vim/script/RosTopicList.vim
 
 " launchファイルのカラースキームをxmlと一緒にする。
 autocmd BufNewFile,BufRead *.launch set filetype=xml
