@@ -1,1 +1,2 @@
-echo "Hello world"
+echon "Hello "
+echon "world"
