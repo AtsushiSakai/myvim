@@ -11,9 +11,8 @@
 " @brief Show ROS topic list
 "
 function! RosTopicList()
-  vnew a
-  r! ls
-  "r! rostopic list
+  vnew +enew
+  r! rostopic list
 endfunction
 
 " Command enable
