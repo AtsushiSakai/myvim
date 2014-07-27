@@ -110,6 +110,9 @@ set wildmenu
 " テキスト挿入中の自動折り返しを日本語に対応させる
 set formatoptions+=mM
 
+"Macでバックスペースを使えるようにする
+set backspace=indent,eol,start
+
 " タイトルを表示
 set title
 set tabstop=2
