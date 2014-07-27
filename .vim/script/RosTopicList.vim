@@ -12,5 +12,9 @@
 "
 function! RosTopicList()
   vnew a
-  r! rostopic list
+  r! ls
+  "r! rostopic list
 endfunction
+
+" Command enable
+command! RosTopicList :call RosTopicList()
