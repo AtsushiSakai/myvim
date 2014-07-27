@@ -30,11 +30,12 @@ if neobundle#exists_not_installed_bundles()
 endif
 
 "====インストールするプラグイン=====
-
+"追加したらNeoBundleInstallすること
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'https://github.com/vim-scripts/SingleCompile'
 NeoBundle 'cohama/vim-hier'
+NeoBundle 'ompugao/ros.vim'
 
 "======neocomplcacheの設定
 " 補完ウィンドウの設定
@@ -49,6 +50,8 @@ inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
 
 "========================
 
+"インデントによる折りたたみをONする
+set foldmethod=indent
 
 "インクリメンタルサーチ
 set incsearch
@@ -66,14 +69,11 @@ syntax on
 "検索時に大文字を含んでいたら大/小を区別
 set ignorecase smartcase
 
-".svn,.gitはgrepしない 内部greoのみ
+".svn,.gitはgrepしない 内部grepのみ
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git
 
 " vimgrep時に自動で別のタブでQuickFixを開く設定
 au QuickfixCmdPost vimgrep | tabnew | cw
-
-"makeしてQuickFixを開く設定
-au QuickfixCmdPost make | copen 
 
 " grepとタイプするだけでvimgrepを使う設定
 command! -complete=file -nargs=+ G call s:grep([<f-args>])
@@ -170,6 +170,8 @@ set fileencoding=utf-8
 " launchファイルのカラースキームをxmlと一緒にする。
 autocmd BufNewFile,BufRead *.launch set filetype=xml
 
+" md as markdown, instead of modula2
+autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=xml
 
 "==========タブ関係===========
 "Anywhere SID.
@@ -260,3 +262,9 @@ nnoremap <Leader>c <Esc>:set opfunc=DoCommentOp<CR>g@
 nnoremap <Leader>C <Esc>:set opfunc=UnCommentOp<CR>g@
 vnoremap <Leader>c <Esc>:call CommentMark(1,'<','>')<CR>
 vnoremap <Leader>C <Esc>:call CommentMark(0,'<','>')<CR>
+
+"========ROS=======
+
+" launchファイルのカラースキームをxmlと一緒にする。
+autocmd BufNewFile,BufRead *.launch set filetype=xml
+
