@@ -49,10 +49,13 @@ inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
 
 "========================
+<<<<<<< HEAD
 
 "インデントによる折りたたみをONする
 "set foldmethod=indent
 
+=======
+>>>>>>> be224d4d9f0bc655481ad18b52c6c70cda4ef7c6
 "インクリメンタルサーチ
 set incsearch
 set hlsearch
@@ -110,17 +113,14 @@ set wildmenu
 " テキスト挿入中の自動折り返しを日本語に対応させる
 set formatoptions+=mM
 
+"Macでバックスペースを使えるようにする
+set backspace=indent,eol,start
+
 " タイトルを表示
 set title
 set tabstop=2
 set shiftwidth=2
 set expandtab
-
-"gf用
-"gfでROSのヘッダファイルに移動できるようにした。
-let $V_ROS_ROOT="/opt/ros/fuerte/include"
-let $V_ROS_TOOLS="~/fuerte_workspace/Tools/"
-set path+=$V_ROS_ROOT+$V_ROS_TOOLS
 
 "<F2> コメントヘッダを挿入
 nmap <F2> <ESC>i<C-R>\/*<CR><CR>@file: <C-R>=expand("%")<CR><CR><CR>@brief: <CR><CR>@author: Atsushi Sakai <CR>*/<ESC>
@@ -145,6 +145,9 @@ if has("clipboard")
   endif 
 endif 
 
+set clipboard+=unnamed
+set clipboard+=autoselect
+
 " 挿入モード終了時に IME 状態を保存しない
 inoremap <silent> <Esc> <Esc>
 inoremap <silent> <C-[> <Esc>
@@ -158,7 +161,7 @@ nnoremap <space>, <C-w>10<>><CR>
 "文字コードを自動判別
 set encoding=utf-8
 set fileencoding=utf-8
-set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
+"set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
 
 "colorscheme darkblue
 " launchファイルのカラースキームをxmlと一緒にする。
@@ -213,8 +216,6 @@ map <silent> [Tag]n :tabnext<CR>
 map <silent> [Tag]p :tabprevious<CR>
 " tp 前のタブ
 
-
-
 "========複数行コメント用=======
 " Comment or uncomment lines from mark a to mark b.
 function! CommentMark(docomment, a, b)
@@ -258,6 +259,17 @@ vnoremap <Leader>c <Esc>:call CommentMark(1,'<','>')<CR>
 vnoremap <Leader>C <Esc>:call CommentMark(0,'<','>')<CR>
 
 "========ROS=======
+"gf用
+"gfでROSのヘッダファイルに移動できるようにした。
+let $V_ROS_ROOT="/opt/ros/fuerte/include"
+let $V_ROS_TOOLS="~/fuerte_workspace/Tools/"
+set path+=$V_ROS_ROOT+$V_ROS_TOOLS
+
+"ROSのトピックのリストを表示するコマンドを有効にする
+source ~/.vim/script/RosTopicList.vim
+
+"ROSのmsgの構成を表示するコマンドを有効にする
+source ~/.vim/script/RosmsgShow.vim
 
 " launchファイルのカラースキームをxmlと一緒にする。
 autocmd BufNewFile,BufRead *.launch set filetype=xml
