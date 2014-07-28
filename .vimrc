@@ -49,13 +49,6 @@ inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
 
 "========================
-<<<<<<< HEAD
-
-"インデントによる折りたたみをONする
-"set foldmethod=indent
-
-=======
->>>>>>> be224d4d9f0bc655481ad18b52c6c70cda4ef7c6
 "インクリメンタルサーチ
 set incsearch
 set hlsearch
