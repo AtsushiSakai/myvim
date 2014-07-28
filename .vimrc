@@ -51,7 +51,7 @@ inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
 "========================
 
 "インデントによる折りたたみをONする
-set foldmethod=indent
+"set foldmethod=indent
 
 "インクリメンタルサーチ
 set incsearch
@@ -84,7 +84,7 @@ function! s:grep(args)
 endfunction
 
 " grでカーソル下のキーワードをvimgrep
-nnoremap <expr> gr ':vimgrep /\<' . expand('<cword>') . '\>/j **/*.' . expand('%:e')
+nnoremap <expr> gr ':vimgrep /\<' . expand('<cword>') . '\>/j /home/komatsu/fuerte_workspace/**/*.' . expand('%:e')
 
 
 " 閉じ括弧を表示した時に，対応する括弧を表示する
