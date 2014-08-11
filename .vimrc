@@ -115,12 +115,6 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
-"gf用
-"gfでROSのヘッダファイルに移動できるようにした。
-let $V_ROS_ROOT="/opt/ros/fuerte/include"
-let $V_ROS_TOOLS="~/fuerte_workspace/Tools/"
-set path+=$V_ROS_ROOT+$V_ROS_TOOLS
-
 "<F2> コメントヘッダを挿入
 nmap <F2> <ESC>i<C-R>\/*<CR><CR>@file: <C-R>=expand("%")<CR><CR><CR>@brief: <CR><CR>@author: Atsushi Sakai <CR>*/<ESC>
 
@@ -261,8 +255,17 @@ vnoremap <Leader>c <Esc>:call CommentMark(1,'<','>')<CR>
 vnoremap <Leader>C <Esc>:call CommentMark(0,'<','>')<CR>
 
 "========ROS=======
-"ROSのトピックのリストを表示する
+"gf用
+"gfでROSのヘッダファイルに移動できるようにした。
+let $V_ROS_ROOT="/opt/ros/fuerte/include"
+let $V_ROS_TOOLS="~/fuerte_workspace/Tools/"
+set path+=$V_ROS_ROOT+$V_ROS_TOOLS
+
+"ROSのトピックのリストを表示するコマンドを有効にする
 source ~/.vim/script/RosTopicList.vim
+
+"ROSのmsgの構成を表示するコマンドを有効にする
+source ~/.vim/script/RosmsgShow.vim
 
 " launchファイルのカラースキームをxmlと一緒にする。
 autocmd BufNewFile,BufRead *.launch set filetype=xml
