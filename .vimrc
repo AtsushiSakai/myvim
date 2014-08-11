@@ -128,7 +128,10 @@ nmap <F2> <ESC>i<C-R>\/*<CR><CR>@file: <C-R>=expand("%")<CR><CR><CR>@brief: <CR>
 noremap <F3> <ESC>:vimgrep /TODO/ **/*.cpp **/*.h **/*.py<CR>:cw<CR>
 
 "<F4> 関数ヘッダを挿入
-nmap <F4> <ESC>i<C-R>\/**<CR>* @brief: <CR>*/<ESC>
+nmap <F4> <ESC>i<C-R>\/**<CR> @brief <CR>/<ESC>
+
+"<F5> クラステンプレート
+nmap <F5> <ESC>i<C-R>\/**<CR> @brief <CR>*/<CR>class hoge{<CR>public:<CR>private:<CR>};<ESC>
 
 "<F6>  タイムスタンプを挿入
 nmap <F6> <ESC>i<C-R>=strftime("%Y/%m/%d")<CR>
