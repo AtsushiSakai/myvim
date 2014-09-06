@@ -166,6 +166,9 @@ autocmd BufNewFile,BufRead *.launch set filetype=xml
 " md as markdown, instead of modula2
 autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=xml
 
+"ctags関係
+set tags=~/fuerte_workspace/tags
+
 "==========タブ関係===========
 "Anywhere SID.
 function! s:SID_PREFIX()
