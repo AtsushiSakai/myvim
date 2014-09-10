@@ -270,3 +270,6 @@ source ~/.vim/script/RosmsgShow.vim
 " launchファイルのカラースキームをxmlと一緒にする。
 autocmd BufNewFile,BufRead *.launch set filetype=xml
 
+" srvファイルに色をつける
+autocmd FileType srv colorscheme molokai
+
