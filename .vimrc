@@ -36,6 +36,14 @@ NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'https://github.com/vim-scripts/SingleCompile'
 NeoBundle 'cohama/vim-hier'
 NeoBundle 'ompugao/ros.vim'
+NeoBundle 'junegunn/vim-easy-align'
+
+"=====vim-easy-alignの設定=====
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
+nmap <Leader>a <Plug>(EasyAlign)
 
 "======neocomplcacheの設定
 " 補完ウィンドウの設定
@@ -45,8 +53,8 @@ let g:neocomplcache_enable_at_startup = 1
 " 大文字が入力されるまで大文字小文字の区別を無視する
 let g:neocomplcache_enable_smart_case = 1
 ""tabで補完候補の選択を行う
-inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
+inoremap <expr><tab> pumvisible() ? "\<Down>" : "\<TAB>"
+inoremap <expr><s-tab> pumvisible() ? "\<Up>" : "\<S-TAB>"
 
 "========================
 "インクリメンタルサーチ
@@ -66,10 +74,10 @@ syntax on
 set ignorecase smartcase
 
 ".svn,.gitはgrepしない 内部grepのみ
-set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git
+set grepprg=grep\ -rnih\ --exclude-dir=.svn\ --exclude-dir=.git
 
-" vimgrep時に自動で別のタブでQuickFixを開く設定
-au QuickfixCmdPost vimgrep | tabnew | cw
+" vimgrep時に自動で別のタブでquickFixを開く設定
+au Quickfixcmdpost vimgrep | tabnew | cw
 
 " grepとタイプするだけでvimgrepを使う設定
 command! -complete=file -nargs=+ G call s:grep([<f-args>])
@@ -104,7 +112,7 @@ set cindent
 set wildmenu
 
 " テキスト挿入中の自動折り返しを日本語に対応させる
-set formatoptions+=mM
+set formatoptions+=mm
 
 "Macでバックスペースを使えるようにする
 set backspace=indent,eol,start
@@ -116,24 +124,24 @@ set shiftwidth=2
 set expandtab
 
 "<F2> コメントヘッダを挿入
-nmap <F2> <ESC>i<C-R>\/*<CR><CR>@file: <C-R>=expand("%")<CR><CR><CR>@brief: <CR><CR>@author: Atsushi Sakai <CR>*/<ESC>
+nmap <F2> <esc>i<c-r>\/*<cr><cr>@file: <C-R>=expand("%")<CR><CR><CR>@brief: <CR><CR>@author: Atsushi Sakai <CR>*/<ESC>
 
 "<F3> TODOを検索
-noremap <F3> <ESC>:vimgrep /TODO/ **/*.cpp **/*.h **/*.py<CR>:cw<CR>
+noremap <F3> <esc>:vimgrep /todo/ **/*.cpp **/*.h **/*.py<CR>:cw<CR>
 
 "<F4> 関数ヘッダを挿入
-nmap <F4> <ESC>i<C-R>\/**<CR> @brief <CR>/<ESC>
+nmap <F4> <esc>i<c-r>\/**<cr> @brief <CR>/<ESC>
 
 "<F5> クラステンプレート
-nmap <F5> <ESC>i<C-R>\/**<CR> @brief <CR>*/<CR>class hoge{<CR>public:<CR>private:<CR>};<ESC>
+nmap <F5> <esc>i<c-r>\/**<cr> @brief <CR>*/<CR>class hoge{<CR>public:<CR>private:<CR>};<ESC>
 
 "<F6>  タイムスタンプを挿入
-nmap <F6> <ESC>i<C-R>=strftime("%Y/%m/%d")<CR>
+nmap <F6> <esc>i<c-r>=strftime("%Y/%m/%d")<CR>
 
 "クリップボード共有
 if has("clipboard") 
   vmap ,y "+y 
-  nmap ,p "+gP 
+  nmap ,p "+gp 
   " exclude:{pattern} must be last ^= prepend += append 
   if has("gui_running") || has("xterm_clipboard") 
     silent! set clipboard^=unnamedplus 
@@ -144,15 +152,15 @@ endif
 set clipboard+=unnamed
 set clipboard+=autoselect
 
-" 挿入モード終了時に IME 状態を保存しない
-inoremap <silent> <Esc> <Esc>
-inoremap <silent> <C-[> <Esc>
+" 挿入モード終了時に ime 状態を保存しない
+inoremap <silent> <esc> <esc>
+inoremap <silent> <c-[> <esc>
 
 "vimrcをスペースドットで開く
-nnoremap <space>. :<C-u>tabedit $MYVIMRC<CR>
+nnoremap <space>. :<c-u>tabedit $MYVIMRC<CR>
 
 "ウインドウサイズ調整用
-nnoremap <space>, <C-w>10<>><CR> 
+nnoremap <space>, <c-w>10<>><cr> 
 
 "文字コードを自動判別
 set encoding=utf-8
@@ -161,10 +169,10 @@ set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp
 
 "colorscheme darkblue
 " launchファイルのカラースキームをxmlと一緒にする。
-autocmd BufNewFile,BufRead *.launch set filetype=xml
+autocmd Bufnewfile,bufread *.launch set filetype=xml
 
 " md as markdown, instead of modula2
-autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=xml
+autocmd Bufnewfile,bufread *.{md,mdwn,mkd,mkdn,mark*} set filetype=xml
 
 "ctags関係
 set tags=~/fuerte_workspace/tags
