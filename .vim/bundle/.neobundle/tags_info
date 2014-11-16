@@ -2,4 +2,5 @@ SingleCompile
 neobundle.vim
 neocomplcache
 ros.vim
+vim-easy-align
 vim-hier

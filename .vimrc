@@ -70,6 +70,7 @@ set pastetoggle=
 "シンタックスオン
 syntax on
 
+
 "検索時に大文字を含んでいたら大/小を区別
 set ignorecase smartcase
 
@@ -277,6 +278,9 @@ source ~/.vim/script/RosTopicList.vim
 
 "ROSのmsgの構成を表示するコマンドを有効にする
 source ~/.vim/script/RosmsgShow.vim
+
+"SVN Commit時にsvn diffの結果を追加する
+source ~/.vim/script/svndiffandcommit.vim
 
 " launchファイルのカラースキームをxmlと一緒にする。
 autocmd BufNewFile,BufRead *.launch set filetype=xml
