@@ -175,7 +175,7 @@ autocmd Bufnewfile,bufread *.launch set filetype=xml
 autocmd Bufnewfile,bufread *.{md,mdwn,mkd,mkdn,mark*} set filetype=xml
 
 "ctags関係
-set tags=~/fuerte_workspace/tags
+set tags=~/tags
 
 "==========タブ関係===========
 "Anywhere SID.
