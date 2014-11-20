@@ -1,2 +1,6 @@
 3.0
+<<<<<<< HEAD
 {'vim-easy-align': {'checked_time': 1410746136, 'installed_uri': 'https://github.com/junegunn/vim-easy-align.git', 'installed_path': '/home/komatsu/.vim/bundle/vim-easy-align', 'revisions': {'1410605689': '21697776b497d4cc14520a11272223048960c240'}, 'updated_time': '1410605689'}}
+=======
+{'vim-easy-align': {'checked_time': 1410698078, 'installed_uri': 'https://github.com/junegunn/vim-easy-align.git', 'installed_path': '/home/atsushisakai/.vim/bundle/vim-easy-align', 'revisions': {'1410605689': '21697776b497d4cc14520a11272223048960c240'}, 'updated_time': '1410605689'}}
+>>>>>>> a69937627081c723839e80e80b9da0c750134d58

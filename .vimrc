@@ -70,6 +70,7 @@ set pastetoggle=
 "シンタックスオン
 syntax on
 
+
 "検索時に大文字を含んでいたら大/小を区別
 set ignorecase smartcase
 
@@ -158,6 +159,9 @@ inoremap <silent> <c-[> <esc>
 
 "vimrcをスペースドットで開く
 nnoremap <space>. :<c-u>tabedit $MYVIMRC<CR>
+
+"スペースx2で過去に修正したファイルエクスプローラを起動する(MRU)
+nnoremap <space><space> :<c-u>MRU<CR>
 
 "ウインドウサイズ調整用
 nnoremap <space>, <c-w>10<>><cr> 
@@ -277,6 +281,9 @@ source ~/.vim/script/RosTopicList.vim
 
 "ROSのmsgの構成を表示するコマンドを有効にする
 source ~/.vim/script/RosmsgShow.vim
+
+"SVN Commit時にsvn diffの結果を追加する
+source ~/.vim/script/svndiffandcommit.vim
 
 " launchファイルのカラースキームをxmlと一緒にする。
 autocmd BufNewFile,BufRead *.launch set filetype=xml
