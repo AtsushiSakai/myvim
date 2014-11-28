@@ -179,7 +179,7 @@ autocmd Bufnewfile,bufread *.launch set filetype=xml
 autocmd Bufnewfile,bufread *.{md,mdwn,mkd,mkdn,mark*} set filetype=xml
 
 " ファイルを保存したらエンコードをutf-8に自動変換する
-autocmd BufWritePre *.{h,cpp} set fenc=utf-8
+autocmd BufWrite *.{h,cpp,msg} set fenc=utf-8
 
 "ctags関係
 set tags=~/tags
