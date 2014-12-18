@@ -1,10 +1,22 @@
 "
 "FileName: .vimrc
 "
-"Discription:vim設定ファイル 
+"Discription: vim configulation
 "
 "Author: Atsushi Sakai
 "
+"
+
+"encoding
+set encoding=utf-8
+scriptencoding utf-8 
+"set fileencoding=utf-8
+set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
+
+"autocmd用 autocmdのすべてにautocmd vimrcとすること
+augroup vimrc
+  autocmd!
+augroup END
 
 "--------------------------------------------------------------------------
 " Neobundle.vimによるplugin管理
@@ -166,23 +178,21 @@ nnoremap <space><space> :<c-u>MRU<CR>
 "ウインドウサイズ調整用
 nnoremap <space>, <c-w>10<>><cr> 
 
-"文字コードを自動判別
-set encoding=utf-8
-"set fileencoding=utf-8
-set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
-
 "colorscheme darkblue
 " launchファイルのカラースキームをxmlと一緒にする。
-autocmd Bufnewfile,bufread *.launch set filetype=xml
+autocmd vimrc Bufnewfile,bufread *.launch set filetype=xml
 
 " md as markdown, instead of modula2
-autocmd Bufnewfile,bufread *.{md,mdwn,mkd,mkdn,mark*} set filetype=xml
+autocmd vimrc Bufnewfile,bufread *.{md,mdwn,mkd,mkdn,mark*} set filetype=xml
 
 " ファイルを保存したらエンコードをutf-8に自動変換する
-autocmd BufWrite *.{h,cpp,msg} set fenc=utf-8
+autocmd vimrc BufWrite *.{h,cpp,msg} set fenc=utf-8
 
 "ctags関係
 set tags=~/tags
+
+"yankring用
+helptags ~/myvim/.vim/doc
 
 "==========タブ関係===========
 "Anywhere SID.
@@ -289,8 +299,8 @@ source ~/.vim/script/RosmsgShow.vim
 source ~/.vim/script/svndiffandcommit.vim
 
 " launchファイルのカラースキームをxmlと一緒にする。
-autocmd BufNewFile,BufRead *.launch set filetype=xml
+autocmd vimrc BufNewFile,BufRead *.launch set filetype=xml
 
 " srvファイルに色をつける
-autocmd FileType srv colorscheme molokai
+autocmd vimrc FileType srv colorscheme molokai
 
