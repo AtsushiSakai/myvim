@@ -1,10 +1,22 @@
 "
 "FileName: .vimrc
 "
-"Discription:vim設定ファイル 
+"Discription: vim configulation
 "
 "Author: Atsushi Sakai
 "
+"
+
+"encoding
+set encoding=utf-8
+scriptencoding utf-8 
+"set fileencoding=utf-8
+set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
+
+"autocmd用 autocmdのすべてにautocmd vimrcとすること
+augroup vimrc
+  autocmd!
+augroup END
 
 "--------------------------------------------------------------------------
 " Neobundle.vimによるplugin管理
@@ -17,7 +29,10 @@ if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
-call neobundle#rc(expand('~/.vim/bundle/'))
+"call neobundle#rc(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
+NeoBundleFetch 'Shougo/neobundle.vim'
+call neobundle#end()
 
 filetype plugin indent on     " Required!
 
@@ -37,6 +52,13 @@ NeoBundle 'https://github.com/vim-scripts/SingleCompile'
 NeoBundle 'cohama/vim-hier'
 NeoBundle 'ompugao/ros.vim'
 NeoBundle 'junegunn/vim-easy-align'
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'yegappan/mru'
+NeoBundle 'Townk/vim-autoclose'
+
+"=====vim-heirの設定=====
+execute "highlight ucurl_my gui=undercurl guisp=Red"
+let g:hier_highlight_group_qf = "ucurl_my"
 
 "=====vim-easy-alignの設定=====
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
@@ -56,6 +78,17 @@ let g:neocomplcache_enable_smart_case = 1
 inoremap <expr><tab> pumvisible() ? "\<Down>" : "\<TAB>"
 inoremap <expr><s-tab> pumvisible() ? "\<Up>" : "\<S-TAB>"
 
+"nerdcommenter用 cc でコメントorコメントアウト
+let NERDSpaceDelims = 1
+nmap cc <Plug>NERDCommenterToggle
+vmap cc <Plug>NERDCommenterToggle
+
+"MRU
+"スペースx2で過去に修正したファイルエクスプローラを起動する(MRU)
+nnoremap <space><space> :<c-u>MRU<CR>
+
+
+
 "========================
 "インクリメンタルサーチ
 set incsearch
@@ -63,6 +96,9 @@ set hlsearch
 set ignorecase
 set smartcase
 set wrapscan
+
+"コマンドを右下に表示する
+set showcmd
 
 "ペースト時に階段上にしない。
 set pastetoggle=
@@ -112,6 +148,9 @@ set cindent
 " コマンドライン補完するときに強化されたものを使う(参照 :help wildmenu)
 set wildmenu
 
+"ルーラを表示する
+set ruler
+
 " テキスト挿入中の自動折り返しを日本語に対応させる
 set formatoptions+=mm
 
@@ -160,29 +199,24 @@ inoremap <silent> <c-[> <esc>
 "vimrcをスペースドットで開く
 nnoremap <space>. :<c-u>tabedit $MYVIMRC<CR>
 
-"スペースx2で過去に修正したファイルエクスプローラを起動する(MRU)
-nnoremap <space><space> :<c-u>MRU<CR>
-
 "ウインドウサイズ調整用
 nnoremap <space>, <c-w>10<>><cr> 
 
-"文字コードを自動判別
-set encoding=utf-8
-"set fileencoding=utf-8
-set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
-
 "colorscheme darkblue
 " launchファイルのカラースキームをxmlと一緒にする。
-autocmd Bufnewfile,bufread *.launch set filetype=xml
+autocmd vimrc Bufnewfile,bufread *.launch set filetype=xml
 
 " md as markdown, instead of modula2
-autocmd Bufnewfile,bufread *.{md,mdwn,mkd,mkdn,mark*} set filetype=xml
+autocmd vimrc Bufnewfile,bufread *.{md,mdwn,mkd,mkdn,mark*} set filetype=xml
 
 " ファイルを保存したらエンコードをutf-8に自動変換する
-autocmd BufWrite *.{h,cpp} set fenc=utf-8
+autocmd vimrc BufWrite *.{h,cpp,msg} set fenc=utf-8
 
 "ctags関係
 set tags=~/tags
+
+"yankring用
+helptags ~/myvim/.vim/doc
 
 "==========タブ関係===========
 "Anywhere SID.
@@ -230,48 +264,6 @@ map <silent> [Tag]n :tabnext<CR>
 map <silent> [Tag]p :tabprevious<CR>
 " tp 前のタブ
 
-"========複数行コメント用=======
-" Comment or uncomment lines from mark a to mark b.
-function! CommentMark(docomment, a, b)
-if !exists('b:comment')
-let b:comment = CommentStr() . ' '
-endif
-if a:docomment
-exe "normal! '" . a:a . "_\<C-V>'" . a:b . 'I' . b:comment
-else
-exe "'".a:a.",'".a:b . 's/^\(\s*\)' . escape(b:comment,'/') . '/\1/e'
-endif
-endfunction
-
-" Comment lines in marks set by g@ operator.
-function! DoCommentOp(type)
-call CommentMark(1, '[', ']')
-endfunction
-
-" Uncomment lines in marks set by g@ operator.
-function! UnCommentOp(type)
-call CommentMark(0, '[', ']')
-endfunction
-
-" Return string used to comment line for current filetype.
-function! CommentStr()
-if &ft == 'cpp' || &ft == 'java' || &ft == 'javascript' || &ft == 'c' || &ft == 'h'
-return '//'
-elseif &ft == 'vim'
-return '"'
-elseif &ft == 'python' || &ft == 'perl' || &ft == 'sh' || &ft == 'R' || &ft == 'ruby'
-return '#'
-elseif &ft == 'lisp'
-return ';'
-endif
-return ''
-endfunction
-
-nnoremap <Leader>c <Esc>:set opfunc=DoCommentOp<CR>g@
-nnoremap <Leader>C <Esc>:set opfunc=UnCommentOp<CR>g@
-vnoremap <Leader>c <Esc>:call CommentMark(1,'<','>')<CR>
-vnoremap <Leader>C <Esc>:call CommentMark(0,'<','>')<CR>
-
 "========ROS=======
 "gf用
 "gfでROSのヘッダファイルに移動できるようにした。
@@ -289,8 +281,8 @@ source ~/.vim/script/RosmsgShow.vim
 source ~/.vim/script/svndiffandcommit.vim
 
 " launchファイルのカラースキームをxmlと一緒にする。
-autocmd BufNewFile,BufRead *.launch set filetype=xml
+autocmd vimrc BufNewFile,BufRead *.launch set filetype=xml
 
 " srvファイルに色をつける
-autocmd FileType srv colorscheme molokai
+autocmd vimrc FileType srv colorscheme molokai
 

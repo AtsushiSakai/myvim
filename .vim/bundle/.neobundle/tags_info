@@ -1,6 +1,9 @@
 SingleCompile
+mru
 neobundle.vim
 neocomplcache
+nerdcommenter
 ros.vim
+vim-autoclose
 vim-easy-align
 vim-hier
