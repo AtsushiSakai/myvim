@@ -29,6 +29,7 @@ if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
+"call neobundle#rc(expand('~/.vim/bundle/'))
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 call neobundle#end()
@@ -53,7 +54,7 @@ NeoBundle 'ompugao/ros.vim'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'yegappan/mru'
-NeoBundle 'Townk/vim-autoclose'
+"NeoBundle 'Townk/vim-autoclose'
 
 "=====vim-heirの設定=====
 execute "highlight ucurl_my gui=undercurl guisp=Red"
@@ -105,6 +106,9 @@ set pastetoggle=
 "シンタックスオン
 syntax on
 
+" 数字のインクリメントとデクリメントを分かりやすく
+nnoremap + <C-a>
+nnoremap - <C-x>
 
 "検索時に大文字を含んでいたら大/小を区別
 set ignorecase smartcase
