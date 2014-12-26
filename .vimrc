@@ -54,7 +54,6 @@ NeoBundle 'ompugao/ros.vim'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'yegappan/mru'
-"NeoBundle 'Townk/vim-autoclose'
 
 "=====vim-heirの設定=====
 execute "highlight ucurl_my gui=undercurl guisp=Red"
@@ -87,9 +86,15 @@ vmap cc <Plug>NERDCommenterToggle
 "スペースx2で過去に修正したファイルエクスプローラを起動する(MRU)
 nnoremap <space><space> :<c-u>MRU<CR>
 
-
-
 "========================
+" 括弧などの自動補完
+inoremap { {}<Left>
+inoremap [ []<Left>
+inoremap ( ()<Left>
+inoremap " ""<Left>
+inoremap ' ''<Left>
+inoremap < <><Left>
+
 "インクリメンタルサーチ
 set incsearch
 set hlsearch
