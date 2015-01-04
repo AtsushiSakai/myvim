@@ -54,6 +54,8 @@ NeoBundle 'ompugao/ros.vim'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'yegappan/mru'
+NeoBundle 'vim-scripts/DoxygenToolkit.vim'
+
 
 "=====vim-heirの設定=====
 execute "highlight ucurl_my gui=undercurl guisp=Red"
