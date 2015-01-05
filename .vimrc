@@ -54,7 +54,7 @@ NeoBundle 'ompugao/ros.vim'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'yegappan/mru'
-NeoBundle 'Townk/vim-autoclose'
+"NeoBundle 'Townk/vim-autoclose'
 
 "=====vim-heirの設定=====
 execute "highlight ucurl_my gui=undercurl guisp=Red"
@@ -87,8 +87,6 @@ vmap cc <Plug>NERDCommenterToggle
 "スペースx2で過去に修正したファイルエクスプローラを起動する(MRU)
 nnoremap <space><space> :<c-u>MRU<CR>
 
-
-
 "========================
 "インクリメンタルサーチ
 set incsearch
@@ -105,7 +103,6 @@ set pastetoggle=
 
 "シンタックスオン
 syntax on
-
 
 "検索時に大文字を含んでいたら大/小を区別
 set ignorecase smartcase
@@ -126,7 +123,6 @@ endfunction
 
 " grでカーソル下のキーワードをvimgrep
 nnoremap <expr> gr ':vimgrep /\<' . expand('<cword>') . '\>/j /home/komatsu/fuerte_workspace/**/*.' . expand('%:e')
-
 
 " 閉じ括弧を表示した時に，対応する括弧を表示する
 set showmatch
