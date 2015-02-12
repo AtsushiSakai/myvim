@@ -12,6 +12,8 @@
 if stridx(expand("%"),"svn-commit")!=-1
   "svn diffの結果をコミットファイルに追加
   r! svn diff
+  "コミットログを無視するコードの追加
+  call append(0, "-- この行以下は無視されます --")
   "diff用のシンタックスに変換
   set syntax=diff
   "カーソルを一番上に移動

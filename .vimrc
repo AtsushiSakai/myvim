@@ -54,7 +54,7 @@ NeoBundle 'ompugao/ros.vim'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'yegappan/mru'
-"NeoBundle 'Townk/vim-autoclose'
+NeoBundle 'vim-scripts/DoxygenToolkit.vim'
 
 "=====vim-heirの設定=====
 execute "highlight ucurl_my gui=undercurl guisp=Red"
@@ -88,6 +88,13 @@ vmap cc <Plug>NERDCommenterToggle
 nnoremap <space><space> :<c-u>MRU<CR>
 
 "========================
+" 括弧などの自動補完
+inoremap { {}<Left>
+inoremap [ []<Left>
+inoremap ( ()<Left>
+inoremap " ""<Left>
+inoremap ' ''<Left>
+
 "インクリメンタルサーチ
 set incsearch
 set hlsearch
@@ -103,6 +110,10 @@ set pastetoggle=
 
 "シンタックスオン
 syntax on
+
+" 数字のインクリメントとデクリメントを分かりやすく
+nnoremap + <C-a>
+nnoremap - <C-x>
 
 "検索時に大文字を含んでいたら大/小を区別
 set ignorecase smartcase
