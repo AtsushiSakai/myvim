@@ -217,7 +217,7 @@ autocmd vimrc Bufnewfile,bufread *.launch set filetype=xml
 autocmd vimrc Bufnewfile,bufread *.{md,mdwn,mkd,mkdn,mark*} set filetype=xml
 
 " ファイルを保存したらエンコードをutf-8に自動変換する
-autocmd vimrc BufWrite *.{h,cpp,msg} set fenc=utf-8
+""autocmd vimrc BufWrite *.{h,cpp,msg} set fenc=utf-8
 
 "ctags関係
 set tags=~/tags
