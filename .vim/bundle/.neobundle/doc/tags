@@ -181,6 +181,7 @@ g:neobundle_log_filename	neobundle.txt	/*g:neobundle_log_filename*
 g:neobundle_rm_command	neobundle.txt	/*g:neobundle_rm_command*
 g:unite_source_neobundle_install_max_processes	neobundle.txt	/*g:unite_source_neobundle_install_max_processes*
 neobundle	neobundle.txt	/*neobundle*
+neobundle#append()	neobundle.txt	/*neobundle#append()*
 neobundle#begin()	neobundle.txt	/*neobundle#begin()*
 neobundle#bundle()	neobundle.txt	/*neobundle#bundle()*
 neobundle#call_hook()	neobundle.txt	/*neobundle#call_hook()*
@@ -195,9 +196,9 @@ neobundle#has_fresh_cache()	neobundle.txt	/*neobundle#has_fresh_cache()*
 neobundle#hooks	neobundle.txt	/*neobundle#hooks*
 neobundle#is_installed()	neobundle.txt	/*neobundle#is_installed()*
 neobundle#is_sourced()	neobundle.txt	/*neobundle#is_sourced()*
+neobundle#load_cache()	neobundle.txt	/*neobundle#load_cache()*
 neobundle#load_toml()	neobundle.txt	/*neobundle#load_toml()*
 neobundle#local()	neobundle.txt	/*neobundle#local()*
-neobundle#rc()	neobundle.txt	/*neobundle#rc()*
 neobundle#source()	neobundle.txt	/*neobundle#source()*
 neobundle#tap()	neobundle.txt	/*neobundle#tap()*
 neobundle#tapped	neobundle.txt	/*neobundle#tapped*
@@ -228,6 +229,7 @@ neobundle-options-focus	neobundle.txt	/*neobundle-options-focus*
 neobundle-options-force	neobundle.txt	/*neobundle-options-force*
 neobundle-options-gui	neobundle.txt	/*neobundle-options-gui*
 neobundle-options-hooks	neobundle.txt	/*neobundle-options-hooks*
+neobundle-options-install_process_timeout	neobundle.txt	/*neobundle-options-install_process_timeout*
 neobundle-options-lazy	neobundle.txt	/*neobundle-options-lazy*
 neobundle-options-name	neobundle.txt	/*neobundle-options-name*
 neobundle-options-overwrite	neobundle.txt	/*neobundle-options-overwrite*

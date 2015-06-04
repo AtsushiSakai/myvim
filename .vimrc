@@ -32,7 +32,6 @@ endif
 "call neobundle#rc(expand('~/.vim/bundle/'))
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
-call neobundle#end()
 
 filetype plugin indent on     " Required!
 
@@ -55,6 +54,8 @@ NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'yegappan/mru'
 NeoBundle 'vim-scripts/DoxygenToolkit.vim'
+
+call neobundle#end()
 
 "=====vim-heirの設定=====
 execute "highlight ucurl_my gui=undercurl guisp=Red"

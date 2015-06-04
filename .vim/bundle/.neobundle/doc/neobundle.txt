@@ -1,6 +1,6 @@
 *neobundle.txt*	Next generation Vim package manager
 
-Version: 3.0
+Version: 3.1
 Author:  Shougo <Shougo.Matsu at gmail.com>
          Copyright (C) 2010 http://github.com/gmarik
 License: MIT license  {{{
@@ -141,13 +141,19 @@ INTERFACE					*neobundle-interface*
 FUNCTIONS 					*neobundle-functions*
 
 neobundle#begin([{base-path}])			*neobundle#begin()*
-		Initializes neobundle.vim. {base-path} is where your
-		downloaded plugins will be placed.
+		Initializes neobundle.vim and start neobundle bundles
+		configuration block.
+		{base-path} is where your downloaded plugins will be placed.
 		If {base-path} is omitted, neobundle looks for a "bundle"
 		directory in the default 'runtimepath'.
-		Note: It executes ":filetype off" automatically.
 		Note: You must not call the function inside a
 		"has('vim_starting')" block.
+		Note: You can use |neobundle#begin()| / |neobundle#end()| block
+		only once in your .vimrc.
+
+		Note: It executes ":filetype off" automatically.
+		Note: You must execute |:NeoBundle| commands in
+		|neobundle#begin()| or |neobundle#append()| block.
 >
 	if has('vim_starting')
 	  if &compatible
@@ -166,12 +172,18 @@ neobundle#begin([{base-path}])			*neobundle#begin()*
 	filetype plugin indent on
 <
 
-neobundle#end()					*neobundle#end()*
-		Finalize neobundle.vim.  If you use |neobundle#begin()|, you
-		must call it after neobundle bundles configuration.
+neobundle#append()				*neobundle#append()*
+		Start neobundle bundles configuration block.
+		You can use multiple |neobundle#append()| / |neobundle#end()|
+		blocks in your .vimrc.
+		Note: It does not initialize neobundle.  You must call
+		|neobundle#begin()| at first.
+		Note: It executes ":filetype off" automatically.
+		Note: You must execute |:NeoBundle| commands in
+		|neobundle#begin()| or |neobundle#append()| block.
 
-neobundle#rc([{base-path}])			*neobundle#rc()*
-		Note: It is deprecated interface.
+neobundle#end()					*neobundle#end()*
+		End neobundle bundles configuration block.
 
 neobundle#source({bundle-names})		*neobundle#source()*
 		Same as |:NeoBundleSource|.
@@ -199,13 +211,14 @@ neobundle#local({directory}, [{options}, [{names}]])
 		'runtimepath', like |pathogen| does. See |neobundle-options|
 		for keys to set in {options}.
 		If {names} is given, {names} directories are only loaded.
+		{names} is |wildcards| list.
 		Note: |:NeoBundleLocal| is a shortcut for this function.
 >
 		" Load plugin from "~/.vim/bundle".
 		call neobundle#local("~/.vim/bundle", {})
 		" Load plugin1 and plugin2 from "~/.vim/bundle".
 		call neobundle#local("~/.vim/bundle",
-		\   {}, ['plugin1', 'plugin2'])
+		\   {}, ['plugin1', 'plugin2', 'vim-*', '*.vim'])
 <
 						 *neobundle#load_toml()*
 neobundle#load_toml({filename}, [{options}])
@@ -319,36 +332,41 @@ neobundle#config({options})
 neobundle#tap({bundle-name})			 *neobundle#tap()*
 		Initialize |neobundle#tapped| and |neobundle#hooks| variable
 		as {bundle-name} bundle.
-		It returns non-zero if {bundle-name} is exists.
+		It returns non-zero if {bundle-name} is exists and not
+		disabled.
 
 neobundle#untap()				 *neobundle#untap()*
 		Clear current |neobundle#tapped| and |neobundle#hooks| variable.
 
 neobundle#has_cache()			 *neobundle#has_cache()*
 		Checks if a cache file is available.
-		You can optimize the .vimrc loading time by using it
-		together with |:NeoBundleLoadCache|.
+		Note: It is deprecated.  You should use
+		|neobundle#load_cache()| instead of it.
+
+neobundle#has_fresh_cache()	 *neobundle#has_fresh_cache()*
+		Similar to |neobundle#has_cache|, but compares the
+		modification time of the cache file to your configuration file
+		({vimrc} or |$MYVIMRC|).
+		Note: It is deprecated.  You should use
+		|neobundle#load_cache()| instead of it.
+
+neobundle#load_cache([{vimrc}])			 *neobundle#load_cache()*
+		Load plugin configuration from the cache file,
+		which is located in `neobundle#get_rtp_dir() . '/cache'`.
+		{vimrc} is compared .vimrc file.  The default is |$MYVIMRC|.
+
+		It returns 1, if the cache file is old or invalid or not
+		found.
 
 		The default cache location can be overridden through
 		|g:neobundle#cache_file|.
-
-		Note: to clear the cache use |:NeoBundleClearCache|,
-		or use |neobundle#commands#has_fresh_cache()| when
-		checking for it.
 >
-	if neobundle#has_cache()
-	  NeoBundleLoadCache
-	else
+	if neobundle#load_cache()
 	  " My Bundles here:
 	  " ...
 	  NeoBundleSaveCache
 	endif
 <
-neobundle#has_fresh_cache([{vimrc}])	 *neobundle#has_fresh_cache()*
-		Similar to |neobundle#has_cache|, but compares the
-		modification time of the cache file to your configuration file
-		({vimrc} or |$MYVIMRC|).
-
 ------------------------------------------------------------------------------
 COMMANDS 					*neobundle-commands*
 
@@ -511,6 +529,9 @@ COMMANDS 					*neobundle-commands*
 		Load plugin configuration from the cache file,
 		which is located in `neobundle#get_rtp_dir() . '/cache'`.
 
+		Note: It is deprecated.  You should use
+		|neobundle#load_cache()| instead of it.
+
 						*:NeoBundleClearCache*
 :NeoBundleClearCache
 		Clear the configuration cache file.
@@ -585,7 +606,6 @@ g:neobundle#install_max_processes
 					*g:neobundle#install_process_timeout*
 g:neobundle#install_process_timeout
 		The time of timeout seconds when updating/installing bundles.
-		Note: This feature is available if you installed |vimproc|.
 
 		Defaults to "120".
 
@@ -984,9 +1004,10 @@ OPTIONS 					*neobundle-options*
 		"7.3.885".
 
 						*neobundle-options-disabled*
-		disabled		(Number)
+		disabled		(Number) or (String)
 		If set to 1, neobundle will disable the plugin.
-		Note: Disabled plugins are ignored when install/update
+		If it is string, neobundle will eval the string.
+		Note: Disabled plugins are not ignored when install/update
 		plugins.
 
 		Example: >
@@ -1009,6 +1030,12 @@ OPTIONS 					*neobundle-options*
 						*neobundle-options-verbose*
 		verbose		(Number)
 		If set to 1, neobundle will print message when it is sourced.
+
+				*neobundle-options-install_process_timeout*
+		install_process_timeout (Number)
+		The time of timeout seconds when updating/installing bundles.
+		If omit it, |g:neobundle#install_process_timeout| will be used.
+		Note: This feature is available if you installed |vimproc|.
 
 						*neobundle-options-autoload*
 		autoload		(Dictionary)
@@ -1306,7 +1333,7 @@ OPTIONS 					*neobundle-options*
 EXAMPLES					*neobundle-examples*
 >
 	" Note: Skip initialization for vim-tiny or vim-small.
-	if !1 | finish | endif
+	if 0 | endif
 
 	if has('vim_starting')
 	  if &compatible
@@ -1324,7 +1351,7 @@ EXAMPLES					*neobundle-examples*
 	NeoBundleFetch 'Shougo/neobundle.vim'
 
 	" Use neobundle standard recipes.
-	NeoBundle 'Shougo/neobundle-vim-recipes'
+	NeoBundle 'Shougo/neobundle-vim-recipes', {'force' : 1}
 
 	" My Bundles here:
 	" Refer to |:NeoBundle-examples|.
@@ -1495,8 +1522,9 @@ The standard recipes are in "neobundle-vim-recipes".
 https://github.com/Shougo/neobundle-vim-recipes
 
 You can use the recipes with the following command in .vimrc.
+Note: You must use "force" option for "neobundle-vim-recipes".
 >
-	NeoBundle 'Shougo/neobundle-vim-recipes'
+	NeoBundle 'Shougo/neobundle-vim-recipes', {'force' : 1}
 <
 
 The recipe files are in JSON format, like this:
@@ -1756,6 +1784,25 @@ https://github.com/Shougo/neobundle.vim/issues/330
 
 A: You must use the functions after |neobundle#end()|.
 Because, the plugins are loaded when neobundle calls |neobundle#end()|.
+
+Q: Fails submoduled repository clone like YouCompleteMe.
+
+A: I think you use the submodule repository in proxy environment.
+
+https://github.com/ekg/freebayes/issues/63
+>
+	$ git config --global url.https://github.com/.insteadOf git://github.com/
+<
+Q: Colorscheme does not load below code. >
+	NeoBundle 'mrkn256.vim'
+	colorscheme mrkn256
+	...
+	neobundle#end()
+
+A: 'runtimepath' is set on |neobundle#end()|.  So it is not set when the
+colorscheme executed.  You can use |neobundle-options-force| for it or write
+|:colorscheme| command after |neobundle#end()|.
+
 
 ==============================================================================
 vim:tw=78:ts=8:ft=help:norl:noet:fen:
