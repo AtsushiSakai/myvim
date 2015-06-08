@@ -26,6 +26,8 @@ Vim enviroment files for ROS
 
 ## RosMsgShow
 
+![RosMsgShowgif](http://f.st-hatena.com/images/fotolife/m/meison_amsl/20150608/20150608224238.gif?1433770958)
+
 
 
 # Detailed description in Japanese
