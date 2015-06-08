@@ -288,6 +288,9 @@ source ~/.vim/script/RosmsgShow.vim
 "SVN Commit時にsvn diffの結果を追加する
 source ~/.vim/script/svndiffandcommit.vim
 
+"catkin_makeを実施するコマンドを有効化
+source ~/.vim/script/RosCatkinMake.vim
+
 " launchファイルのカラースキームをxmlと一緒にする。
 autocmd vimrc BufNewFile,BufRead *.launch set filetype=xml
 
