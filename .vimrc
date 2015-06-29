@@ -272,6 +272,10 @@ map <silent> [Tag]n :tabnext<CR>
 map <silent> [Tag]p :tabprevious<CR>
 " tp 前のタブ
 
+" Octave用のスクリプト
+source ~/.vim/script/octave.vim
+
+
 "========ROS=======
 "gf用
 "gfでROSのヘッダファイルに移動できるようにした。
