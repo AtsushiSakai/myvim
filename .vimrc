@@ -55,6 +55,10 @@ NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'yegappan/mru'
 NeoBundle 'vim-scripts/DoxygenToolkit.vim'
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'kannokanno/previm'
+NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'mattn/emmet-vim'
 
 "=====vim-heirの設定=====
 execute "highlight ucurl_my gui=undercurl guisp=Red"
@@ -214,7 +218,10 @@ nnoremap <space>, <c-w>10<>><cr>
 autocmd vimrc Bufnewfile,bufread *.launch set filetype=xml
 
 " md as markdown, instead of modula2
-autocmd vimrc Bufnewfile,bufread *.{md,mdwn,mkd,mkdn,mark*} set filetype=xml
+autocmd vimrc Bufnewfile,bufread *.{mdwn,mkd,mkdn,mark*} set filetype=xml
+
+" markdown認識用
+au BufRead,BufNewFile *.md set filetype=markdown
 
 " ファイルを保存したらエンコードをutf-8に自動変換する
 autocmd vimrc BufWrite *.{h,cpp,msg} set fenc=utf-8
@@ -270,6 +277,15 @@ map <silent> [Tag]n :tabnext<CR>
 " tn 次のタブ
 map <silent> [Tag]p :tabprevious<CR>
 " tp 前のタブ
+
+
+" Emmet用設定"
+
+"let g:user_emmet_settings = { 
+\ 'variables': { 
+\ 'lang' : 'ja' 
+\ } 
+\} 
 
 "========ROS=======
 "gf用
