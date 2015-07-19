@@ -279,7 +279,6 @@ map <silent> [Tag]n :tabnext<CR>
 map <silent> [Tag]p :tabprevious<CR>
 " tp 前のタブ
 
-<<<<<<< HEAD
 
 " Emmet用設定"
 
@@ -288,11 +287,9 @@ map <silent> [Tag]p :tabprevious<CR>
 \ 'lang' : 'ja' 
 \ } 
 \} 
-=======
+
 " Octave用のスクリプト
 source ~/.vim/script/octave.vim
-
->>>>>>> efb54e4bf85f1cb600dba0452d3376a403fa2103
 
 "========ROS=======
 "gf用
