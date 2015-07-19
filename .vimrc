@@ -32,7 +32,6 @@ endif
 "call neobundle#rc(expand('~/.vim/bundle/'))
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
-call neobundle#end()
 
 filetype plugin indent on     " Required!
 
@@ -59,6 +58,8 @@ NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'mattn/emmet-vim'
+
+call neobundle#end()
 
 "=====vim-heirの設定=====
 execute "highlight ucurl_my gui=undercurl guisp=Red"
@@ -224,7 +225,7 @@ autocmd vimrc Bufnewfile,bufread *.{mdwn,mkd,mkdn,mark*} set filetype=xml
 au BufRead,BufNewFile *.md set filetype=markdown
 
 " ファイルを保存したらエンコードをutf-8に自動変換する
-autocmd vimrc BufWrite *.{h,cpp,msg} set fenc=utf-8
+""autocmd vimrc BufWrite *.{h,cpp,msg} set fenc=utf-8
 
 "ctags関係
 set tags=~/tags
@@ -278,6 +279,7 @@ map <silent> [Tag]n :tabnext<CR>
 map <silent> [Tag]p :tabprevious<CR>
 " tp 前のタブ
 
+<<<<<<< HEAD
 
 " Emmet用設定"
 
@@ -286,6 +288,11 @@ map <silent> [Tag]p :tabprevious<CR>
 \ 'lang' : 'ja' 
 \ } 
 \} 
+=======
+" Octave用のスクリプト
+source ~/.vim/script/octave.vim
+
+>>>>>>> efb54e4bf85f1cb600dba0452d3376a403fa2103
 
 "========ROS=======
 "gf用
@@ -302,6 +309,9 @@ source ~/.vim/script/RosmsgShow.vim
 
 "SVN Commit時にsvn diffの結果を追加する
 source ~/.vim/script/svndiffandcommit.vim
+
+"catkin_makeを実施するコマンドを有効化
+source ~/.vim/script/RosCatkinMake.vim
 
 " launchファイルのカラースキームをxmlと一緒にする。
 autocmd vimrc BufNewFile,BufRead *.launch set filetype=xml

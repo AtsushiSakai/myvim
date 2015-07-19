@@ -1,26 +1,41 @@
 # What is this
 
-個人的Vim設定用ファイルです。
+Vim enviroment files for ROS 
 
-#設定方法
+# Install
 
-1.ホームディレクトリにmyvimをクローン
-git https://gist.github.com/8822390.git
+1　Checkout software
 
-2. シンボリックリンクを使って、vimのそれらのファイルを認識させる。
-ln -s ~/myvim/.vimrc ~/.vimrc
-ln -s ~/myvim/.vim ~/.vim
+> git clone https://gist.github.com/8822390.git ~
 
-3. 
-neobundleが無いとか言われたら下記のコマンドでneobundleをインストール
-git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+2 Create symboric links
 
-#機能の説明
+> ln -s ~/myvim/.vimrc ~/.vimrc ~/myvim/.vim ~/.vim
 
-* 仕事を1.5倍ぐらい早くするVim設定 - MY ENIGMA http://d.hatena.ne.jp/meison_amsl/20120403/1333452345
+3 Install neobundle
 
-* おすすめVimプラグイン - MY ENIGMA http://d.hatena.ne.jp/meison_amsl/20141219
+> git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+
+# How to use
+
+## RosTopicList
 
 
+## RosCatkinMake
+
+
+## RosMsgShow
+
+![RosMsgShowgif](http://f.st-hatena.com/images/fotolife/m/meison_amsl/20150608/20150608224238.gif?1433770958)
+
+
+
+# Detailed description in Japanese
+
+* [仕事を1.5倍ぐらい早くするVim設定 - MY ENIGMA](http://d.hatena.ne.jp/meison_amsl/20120403/1333452345)
+
+* [おすすめVimプラグイン - MY ENIGMA](http://d.hatena.ne.jp/meison_amsl/20141219)
+
+* [ROS用のVim設定 - MyEnigma](http://myenigma.hatenablog.com/entry/20141129/1417248480)
 
 

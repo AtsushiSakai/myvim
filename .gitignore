@@ -2,3 +2,5 @@
 
 #vimのバックアップファイル
 .vim/backup/
+.vim/bundle/.neobundle/
+
