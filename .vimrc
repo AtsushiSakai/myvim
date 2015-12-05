@@ -114,6 +114,10 @@ set wrapscan
 "コマンドを右下に表示する
 set showcmd
 
+"マウスの設定"
+set mouse=a
+set ttymouse=xterm2
+
 "コマンドヒストリーの履歴記憶数"
 set history=5000
 
