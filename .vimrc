@@ -58,14 +58,10 @@ NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'mattn/emmet-vim'
-<<<<<<< HEAD
 NeoBundleLazy 'mopp/layoutplugin.vim', { 'autoload' : { 'commands' : 'LayoutPlugin'} }
 NeoBundle 'AtsushiSakai/bookmarklet.vim'
 NeoBundle 'AtsushiSakai/comfortablecpp.vim'
-
-=======
 NeoBundle 'yegappan/mru'
->>>>>>> 515947892db9c6513ce88579c2777c12df6a778c
 
 call neobundle#end()
 
