@@ -58,6 +58,10 @@ NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'mattn/emmet-vim'
+NeoBundleLazy 'mopp/layoutplugin.vim', { 'autoload' : { 'commands' : 'LayoutPlugin'} }
+NeoBundle 'AtsushiSakai/bookmarklet.vim'
+NeoBundle 'AtsushiSakai/comfortablecpp.vim'
+
 
 call neobundle#end()
 
@@ -109,6 +113,9 @@ set wrapscan
 
 "コマンドを右下に表示する
 set showcmd
+
+"コマンドヒストリーの履歴記憶数"
+set history=5000
 
 "ペースト時に階段上にしない。
 set pastetoggle=

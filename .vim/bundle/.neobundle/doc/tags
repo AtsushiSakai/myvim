@@ -294,6 +294,7 @@ g:user_emmet_leader_key	emmet.txt	/*g:user_emmet_leader_key*
 g:user_emmet_mode	emmet.txt	/*g:user_emmet_mode*
 g:user_emmet_settings	emmet.txt	/*g:user_emmet_settings*
 neobundle	neobundle.txt	/*neobundle*
+neobundle#append()	neobundle.txt	/*neobundle#append()*
 neobundle#begin()	neobundle.txt	/*neobundle#begin()*
 neobundle#bundle()	neobundle.txt	/*neobundle#bundle()*
 neobundle#call_hook()	neobundle.txt	/*neobundle#call_hook()*
@@ -308,9 +309,9 @@ neobundle#has_fresh_cache()	neobundle.txt	/*neobundle#has_fresh_cache()*
 neobundle#hooks	neobundle.txt	/*neobundle#hooks*
 neobundle#is_installed()	neobundle.txt	/*neobundle#is_installed()*
 neobundle#is_sourced()	neobundle.txt	/*neobundle#is_sourced()*
+neobundle#load_cache()	neobundle.txt	/*neobundle#load_cache()*
 neobundle#load_toml()	neobundle.txt	/*neobundle#load_toml()*
 neobundle#local()	neobundle.txt	/*neobundle#local()*
-neobundle#rc()	neobundle.txt	/*neobundle#rc()*
 neobundle#source()	neobundle.txt	/*neobundle#source()*
 neobundle#tap()	neobundle.txt	/*neobundle#tap()*
 neobundle#tapped	neobundle.txt	/*neobundle#tapped*
@@ -337,10 +338,12 @@ neobundle-options-depends	neobundle.txt	/*neobundle-options-depends*
 neobundle-options-directory	neobundle.txt	/*neobundle-options-directory*
 neobundle-options-disabled	neobundle.txt	/*neobundle-options-disabled*
 neobundle-options-external_commands	neobundle.txt	/*neobundle-options-external_commands*
+neobundle-options-fetch	neobundle.txt	/*neobundle-options-fetch*
 neobundle-options-focus	neobundle.txt	/*neobundle-options-focus*
 neobundle-options-force	neobundle.txt	/*neobundle-options-force*
 neobundle-options-gui	neobundle.txt	/*neobundle-options-gui*
 neobundle-options-hooks	neobundle.txt	/*neobundle-options-hooks*
+neobundle-options-install_process_timeout	neobundle.txt	/*neobundle-options-install_process_timeout*
 neobundle-options-lazy	neobundle.txt	/*neobundle-options-lazy*
 neobundle-options-name	neobundle.txt	/*neobundle-options-name*
 neobundle-options-overwrite	neobundle.txt	/*neobundle-options-overwrite*

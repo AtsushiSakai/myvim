@@ -1,6 +1,9 @@
 DoxygenToolkit.vim
 SingleCompile
+bookmarklet.vim
+comfortablecpp.vim
 emmet-vim
+layoutplugin.vim
 mru
 neobundle.vim
 neocomplcache
