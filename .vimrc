@@ -29,7 +29,6 @@ if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
-"call neobundle#rc(expand('~/.vim/bundle/'))
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
@@ -186,21 +185,6 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
-"<F2> コメントヘッダを挿入
-nmap <F2> <esc>i<c-r>\/*<cr><cr>@file: <C-R>=expand("%")<CR><CR><CR>@brief: <CR><CR>@author: Atsushi Sakai <CR>*/<ESC>
-
-"<F3> TODOを検索
-noremap <F3> <esc>:vimgrep /todo/ **/*.cpp **/*.h **/*.py<CR>:cw<CR>
-
-"<F4> 関数ヘッダを挿入
-nmap <F4> <esc>i<c-r>\/**<cr> @brief <CR>/<ESC>
-
-"<F5> クラステンプレート
-nmap <F5> <esc>i<c-r>\/**<cr> @brief <CR>*/<CR>class hoge{<CR>public:<CR>private:<CR>};<ESC>
-
-"<F6>  タイムスタンプを挿入
-nmap <F6> <esc>i<c-r>=strftime("%Y/%m/%d")<CR>
-
 "クリップボード共有
 if has("clipboard") 
   vmap ,y "+y 
@@ -289,15 +273,6 @@ map <silent> [Tag]n :tabnext<CR>
 " tn 次のタブ
 map <silent> [Tag]p :tabprevious<CR>
 " tp 前のタブ
-
-
-" Emmet用設定"
-
-"let g:user_emmet_settings = { 
-\ 'variables': { 
-\ 'lang' : 'ja' 
-\ } 
-\} 
 
 " Octave用のスクリプト
 source ~/.vim/script/octave.vim
