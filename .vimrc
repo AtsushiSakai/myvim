@@ -5,7 +5,6 @@
 "
 "Author: Atsushi Sakai
 "
-"
 
 "encoding
 set encoding=utf-8
