@@ -1,6 +1,8 @@
 #Gitで管理しないファイルの設定 A.Sakai
 
 #vimのバックアップファイル
-.vim/backup/*
-.vim/bundle/.neobundle/*
+.vim/backup/*~
+.vim/bundle/*
+.DS_Store
+.netrwhist
 
