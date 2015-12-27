@@ -59,7 +59,6 @@ NeoBundle 'mattn/emmet-vim'
 NeoBundleLazy 'mopp/layoutplugin.vim', { 'autoload' : { 'commands' : 'LayoutPlugin'} }
 NeoBundle 'AtsushiSakai/bookmarklet.vim'
 NeoBundle 'AtsushiSakai/comfortablecpp.vim'
-NeoBundle 'yegappan/mru'
 
 call neobundle#end()
 
@@ -90,8 +89,7 @@ let NERDSpaceDelims = 1
 nmap cc <Plug>NERDCommenterToggle
 vmap cc <Plug>NERDCommenterToggle
 
-"MRU
-"スペースx2で過去に修正したファイルエクスプローラを起動する(MRU)
+"MRUスペースx2で過去に修正したファイルエクスプローラを起動する(MRU)
 nnoremap <space><space> :<c-u>MRU<CR>
 
 "========================
@@ -109,8 +107,14 @@ set ignorecase
 set smartcase
 set wrapscan
 
+" ESCを二回押すことでハイライトを消す
+nmap <silent> <Esc><Esc> :nohlsearch<CR>
+
 "コマンドを右下に表示する
 set showcmd
+
+"別ファイルで修正された場合に自動読み込み"
+set autoread
 
 "マウスの設定"
 set mouse=a
@@ -121,6 +125,10 @@ set history=5000
 
 "ペースト時に階段上にしない。
 set pastetoggle=
+
+set virtualedit=all     " カーソルを文字が存在しない部分でも動けるようにする
+set hidden              " バッファを閉じる代わりに隠す（Undo履歴を残すため）
+set switchbuf=useopen   " 新しく開く代わりにすでに開いてあるバッファを開く
 
 "シンタックスオン
 syntax on
@@ -149,9 +157,20 @@ endfunction
 " grでカーソル下のキーワードをvimgrep
 nnoremap <expr> gr ':vimgrep /\<' . expand('<cword>') . '\>/j /home/komatsu/fuerte_workspace/**/*.' . expand('%:e')
 
+" 入力モード中に素早くjjと入力した場合はESCとみなす
+inoremap jj <Esc>
+
+" 検索後にジャンプした際に検索単語を画面中央に持ってくる
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+
 " 閉じ括弧を表示した時に，対応する括弧を表示する
 set showmatch
-set matchtime=2 "表示時間の設定
+set matchtime=3 "表示時間の設定
 
 "バックアップファイル系
 set backup
@@ -205,8 +224,11 @@ inoremap <silent> <c-[> <esc>
 "vimrcをスペースドットで開く
 nnoremap <space>. :<c-u>tabedit $MYVIMRC<CR>
 
-"ウインドウサイズ調整用
-nnoremap <space>, <c-w>10<>><cr> 
+" Shift + 矢印でウィンドウサイズを変更
+nnoremap <S-Left>  <C-w><<CR>
+nnoremap <S-Right> <C-w>><CR>
+nnoremap <S-Up>    <C-w>-<CR>
+nnoremap <S-Down>  <C-w>+<CR>
 
 "colorscheme darkblue
 " launchファイルのカラースキームをxmlと一緒にする。
