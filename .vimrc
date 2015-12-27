@@ -126,7 +126,6 @@ set history=5000
 "ペースト時に階段上にしない。
 set pastetoggle=
 
-set virtualedit=all     " カーソルを文字が存在しない部分でも動けるようにする
 set hidden              " バッファを閉じる代わりに隠す（Undo履歴を残すため）
 set switchbuf=useopen   " 新しく開く代わりにすでに開いてあるバッファを開く
 
