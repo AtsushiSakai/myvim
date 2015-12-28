@@ -52,9 +52,6 @@ NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'yegappan/mru'
 NeoBundle 'vim-scripts/DoxygenToolkit.vim'
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'kannokanno/previm'
-NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'mattn/emmet-vim'
 NeoBundleLazy 'mopp/layoutplugin.vim', { 'autoload' : { 'commands' : 'LayoutPlugin'} }
 NeoBundle 'AtsushiSakai/bookmarklet.vim'
@@ -91,6 +88,8 @@ vmap cc <Plug>NERDCommenterToggle
 
 "MRUスペースx2で過去に修正したファイルエクスプローラを起動する(MRU)
 nnoremap <space><space> :<c-u>MRU<CR>
+
+set nofoldenable    " disable folding
 
 "========================
 " 括弧などの自動補完
@@ -322,3 +321,5 @@ autocmd vimrc BufNewFile,BufRead *.launch set filetype=xml
 " srvファイルに色をつける
 autocmd vimrc FileType srv colorscheme molokai
 
+"gvimのCdCurrentを設定 "
+command! -nargs=0 CdCurrent cd %:p:h
