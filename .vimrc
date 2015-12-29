@@ -20,27 +20,28 @@ augroup END
 "--------------------------------------------------------------------------
 " Neobundle.vimによるplugin管理
 "------------------------------------------------------------------
-"おまじない
-set nocompatible               " Be iMproved
-filetype off                   " Required!
+"Note: Skip initialization for vim-tiny or vim-small.
+if 0 | endif
 
 if has('vim_starting')
+  if &compatible
+    set nocompatible               " Be iMproved
+  endif
+
+  " Required:
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
+" Required:
 call neobundle#begin(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-filetype plugin indent on     " Required!
-
-" Installation check.
-if neobundle#exists_not_installed_bundles()
-  echomsg 'Not installed bundles : ' .
-            \ string(neobundle#get_not_installed_bundle_names())
-  echomsg 'Please execute ":NeoBundleInstall" command.'
-  "finish
-endif
-
+" My Bundles here:
+" Refer to |:NeoBundle-examples|.
+" Note: You don't set neobundle setting in .gvimrc!
 "====インストールするプラグイン=====
 "追加したらNeoBundleInstallすること
 NeoBundle 'Shougo/neobundle.vim'
@@ -57,7 +58,27 @@ NeoBundleLazy 'mopp/layoutplugin.vim', { 'autoload' : { 'commands' : 'LayoutPlug
 NeoBundle 'AtsushiSakai/bookmarklet.vim'
 NeoBundle 'AtsushiSakai/comfortablecpp.vim'
 
+"Python"
+NeoBundleLazy 'davidhalter/jedi-vim',{
+  \"autoload" : {"filetypes" :[ "python" ]}
+\}
+
+"Markdown"
+NeoBundleLazy 'kannokanno/previm',{
+  \"autoload" : {"filetypes" :[ "markdown" ]}
+\}
+
+
 call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+
+
 
 "=====vim-heirの設定=====
 execute "highlight ucurl_my gui=undercurl guisp=Red"
@@ -245,7 +266,7 @@ au BufRead,BufNewFile *.md set filetype=markdown
 set tags=~/tags
 
 "yankring用
-helptags ~/myvim/.vim/doc
+helptags ~/myvim/.vim/doc/
 
 "==========タブ関係===========
 "Anywhere SID.
