@@ -124,3 +124,25 @@ _Image with alt :_
 ![picture alt](http://www.brightlightpictures.com/assets/images/portfolio/thethaw_header.jpg "Title is optional")
 
     Markup : ![picture alt](http://www.brightlightpictures.com/assets/images/portfolio/thethaw_header.jpg "Title is optional")
+
+# mermaidの説明
+
+ノードの形状  | mermaid
+------------- | -------------
+四角 | node[hoge]
+角丸四角  | node(hoge)
+丸  | node((hoge))
+片方リポン  | node>hoge]
+菱型  | node{hoge}
+
+リンクの形状  | mermaid
+------------- | -------------
+線 | A --- B
+矢印線  | A --> B
+テキスト付き線  | A-- This is the text --- B
+テキスト付き矢印線  | A-- text -->B
+点線  | A-.->B
+テキスト付き点線  | A-. text .->B
+太線  | A==>B
+テキスト付き太線  | A== text ==>B
+
