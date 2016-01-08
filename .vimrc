@@ -20,27 +20,28 @@ augroup END
 "--------------------------------------------------------------------------
 " Neobundle.vimによるplugin管理
 "------------------------------------------------------------------
-"おまじない
-set nocompatible               " Be iMproved
-filetype off                   " Required!
+"Note: Skip initialization for vim-tiny or vim-small.
+if 0 | endif
 
 if has('vim_starting')
+  if &compatible
+    set nocompatible               " Be iMproved
+  endif
+
+  " Required:
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
+" Required:
 call neobundle#begin(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-filetype plugin indent on     " Required!
-
-" Installation check.
-if neobundle#exists_not_installed_bundles()
-  echomsg 'Not installed bundles : ' .
-            \ string(neobundle#get_not_installed_bundle_names())
-  echomsg 'Please execute ":NeoBundleInstall" command.'
-  "finish
-endif
-
+" My Bundles here:
+" Refer to |:NeoBundle-examples|.
+" Note: You don't set neobundle setting in .gvimrc!
 "====インストールするプラグイン=====
 "追加したらNeoBundleInstallすること
 NeoBundle 'Shougo/neobundle.vim'
@@ -52,16 +53,32 @@ NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'yegappan/mru'
 NeoBundle 'vim-scripts/DoxygenToolkit.vim'
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'kannokanno/previm'
-NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'mattn/emmet-vim'
 NeoBundleLazy 'mopp/layoutplugin.vim', { 'autoload' : { 'commands' : 'LayoutPlugin'} }
 NeoBundle 'AtsushiSakai/bookmarklet.vim'
 NeoBundle 'AtsushiSakai/comfortablecpp.vim'
-NeoBundle 'yegappan/mru'
+
+"Python"
+NeoBundleLazy 'davidhalter/jedi-vim',{
+  \"autoload" : {"filetypes" :[ "python" ]}
+\}
+
+"Markdown"
+NeoBundleLazy 'kannokanno/previm',{
+  \"autoload" : {"filetypes" :[ "markdown" ]}
+\}
+
 
 call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+
+
 
 "=====vim-heirの設定=====
 execute "highlight ucurl_my gui=undercurl guisp=Red"
@@ -90,9 +107,10 @@ let NERDSpaceDelims = 1
 nmap cc <Plug>NERDCommenterToggle
 vmap cc <Plug>NERDCommenterToggle
 
-"MRU
-"スペースx2で過去に修正したファイルエクスプローラを起動する(MRU)
+"MRUスペースx2で過去に修正したファイルエクスプローラを起動する(MRU)
 nnoremap <space><space> :<c-u>MRU<CR>
+
+set nofoldenable    " disable folding
 
 "========================
 " 括弧などの自動補完
@@ -109,8 +127,14 @@ set ignorecase
 set smartcase
 set wrapscan
 
+" ESCを二回押すことでハイライトを消す
+nmap <silent> <Esc><Esc> :nohlsearch<CR>
+
 "コマンドを右下に表示する
 set showcmd
+
+"別ファイルで修正された場合に自動読み込み"
+set autoread
 
 "マウスの設定"
 set mouse=a
@@ -121,6 +145,9 @@ set history=5000
 
 "ペースト時に階段上にしない。
 set pastetoggle=
+
+set hidden              " バッファを閉じる代わりに隠す（Undo履歴を残すため）
+set switchbuf=useopen   " 新しく開く代わりにすでに開いてあるバッファを開く
 
 "シンタックスオン
 syntax on
@@ -149,9 +176,20 @@ endfunction
 " grでカーソル下のキーワードをvimgrep
 nnoremap <expr> gr ':vimgrep /\<' . expand('<cword>') . '\>/j /home/komatsu/fuerte_workspace/**/*.' . expand('%:e')
 
+" 入力モード中に素早くjjと入力した場合はESCとみなす
+inoremap jj <Esc>
+
+" 検索後にジャンプした際に検索単語を画面中央に持ってくる
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+
 " 閉じ括弧を表示した時に，対応する括弧を表示する
 set showmatch
-set matchtime=2 "表示時間の設定
+set matchtime=3 "表示時間の設定
 
 "バックアップファイル系
 set backup
@@ -205,8 +243,11 @@ inoremap <silent> <c-[> <esc>
 "vimrcをスペースドットで開く
 nnoremap <space>. :<c-u>tabedit $MYVIMRC<CR>
 
-"ウインドウサイズ調整用
-nnoremap <space>, <c-w>10<>><cr> 
+" Shift + 矢印でウィンドウサイズを変更
+nnoremap <S-Left>  <C-w><<CR>
+nnoremap <S-Right> <C-w>><CR>
+nnoremap <S-Up>    <C-w>-<CR>
+nnoremap <S-Down>  <C-w>+<CR>
 
 "colorscheme darkblue
 " launchファイルのカラースキームをxmlと一緒にする。
@@ -225,7 +266,7 @@ au BufRead,BufNewFile *.md set filetype=markdown
 set tags=~/tags
 
 "yankring用
-helptags ~/myvim/.vim/doc
+helptags ~/myvim/.vim/doc/
 
 "==========タブ関係===========
 "Anywhere SID.
@@ -301,3 +342,5 @@ autocmd vimrc BufNewFile,BufRead *.launch set filetype=xml
 " srvファイルに色をつける
 autocmd vimrc FileType srv colorscheme molokai
 
+"gvimのCdCurrentを設定 "
+command! -nargs=0 CdCurrent cd %:p:h
