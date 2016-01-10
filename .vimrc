@@ -288,10 +288,8 @@ helptags ~/myvim/.vim/doc/
 ""map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
 ""imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
 "Ubuntu
-map <C-K> :pyf /usr/share/vim/addons/syntax/clang-format.py<cr>
-imap <C-K> <c-o>:pyf /usr/share/vim/addons/syntax/clang-format.py<cr>
-
-
+map <C-K> :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
+imap <C-K> <c-o>:pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
 
 "==========タブ関係===========
 "Anywhere SID.
