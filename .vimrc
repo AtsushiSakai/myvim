@@ -52,11 +52,24 @@ NeoBundle 'ompugao/ros.vim'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'yegappan/mru'
-NeoBundle 'vim-scripts/DoxygenToolkit.vim'
-NeoBundle 'mattn/emmet-vim'
 NeoBundleLazy 'mopp/layoutplugin.vim', { 'autoload' : { 'commands' : 'LayoutPlugin'} }
 NeoBundle 'AtsushiSakai/bookmarklet.vim'
-NeoBundle 'AtsushiSakai/comfortablecpp.vim'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'vim-scripts/Align'
+NeoBundle 'vim-scripts/YankRing.vim'
+
+"C++"
+NeoBundleLazy 'vim-scripts/DoxygenToolkit.vim',{
+  \"autoload" : {"filetypes" :[ "cpp" ]}
+\}
+NeoBundleLazy 'AtsushiSakai/comfortablecpp.vim',{
+  \"autoload" : {"filetypes" :[ "cpp" ]}
+\}
+
+"html"
+NeoBundleLazy 'mattn/emmet-vim',{
+  \"autoload" : {"filetypes" :[ "html" ]}
+\}
 
 "Python"
 NeoBundleLazy 'davidhalter/jedi-vim',{
@@ -267,6 +280,16 @@ set tags=~/tags
 
 "yankring用
 helptags ~/myvim/.vim/doc/
+
+"clang-format用設定
+"Mac
+map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
+imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
+"Ubuntu
+""map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
+""imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
+
+
 
 "==========タブ関係===========
 "Anywhere SID.
