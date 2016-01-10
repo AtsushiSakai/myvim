@@ -285,11 +285,11 @@ helptags ~/myvim/.vim/doc/
 
 "clang-format用設定
 "Mac
-map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
-imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
-"Ubuntu
 ""map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
 ""imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
+"Ubuntu
+map <C-K> :pyf /usr/share/vim/addons/syntax/clang-format.py<cr>
+imap <C-K> <c-o>:pyf /usr/share/vim/addons/syntax/clang-format.py<cr>
 
 
 
