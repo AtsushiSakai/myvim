@@ -57,6 +57,7 @@ NeoBundle 'mattn/emmet-vim'
 NeoBundleLazy 'mopp/layoutplugin.vim', { 'autoload' : { 'commands' : 'LayoutPlugin'} }
 NeoBundle 'AtsushiSakai/bookmarklet.vim'
 NeoBundle 'AtsushiSakai/comfortablecpp.vim'
+NeoBundle 'AtsushiSakai/vim-ros'
 
 "Python"
 NeoBundleLazy 'davidhalter/jedi-vim',{
