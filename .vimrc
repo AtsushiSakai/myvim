@@ -280,6 +280,7 @@ set tags=~/tags
 "yankring用
 helptags ~/myvim/.vim/doc/
 
+"echo system("uname")
 "OS毎の設定"
 if system("uname")=="Darwin\n"
     " Mac環境用のコード
@@ -291,9 +292,9 @@ if system("uname")=="Darwin\n"
     "clang-format用設定
     map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
     imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
-elseif has('unix')
+elseif system("uname")=="Linux\n"
     " Linux用のコード
-    echo "This is unix"
+    "echo "This is unix"
 
     "clang-format用設定
     map <C-K> :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
