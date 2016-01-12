@@ -54,6 +54,8 @@ NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'yegappan/mru'
 NeoBundleLazy 'mopp/layoutplugin.vim', { 'autoload' : { 'commands' : 'LayoutPlugin'} }
 NeoBundle 'AtsushiSakai/bookmarklet.vim'
+NeoBundle 'AtsushiSakai/comfortablecpp.vim'
+NeoBundle 'AtsushiSakai/vim-ros'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'vim-scripts/Align'
 NeoBundle 'vim-scripts/YankRing.vim'
@@ -280,29 +282,25 @@ helptags ~/myvim/.vim/doc/
 
 "OS毎の設定"
 if system("uname")=="Darwin\n"
-    " UNIX環境用のコード
+    " Mac環境用のコード
     "echo "This is mac"
+
+    "Macでバックスペースを使えるようにする
+    set backspace=indent,eol,start
 
     "clang-format用設定
     map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
     imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
 elseif has('unix')
-    " Mac用のコード
+    " Linux用のコード
     echo "This is unix"
 
-    "Macでバックスペースを使えるようにする
-    set backspace=indent,eol,start
-
-
- 
     "clang-format用設定
-    map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
-    imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
+    map <C-K> :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
+    imap <C-K> <c-o>:pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
 elseif has("win32")
     " Windows環境用のコード
 endif
-
-
 
 "==========タブ関係===========
 "Anywhere SID.
