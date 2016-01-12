@@ -226,9 +226,6 @@ set ruler
 " テキスト挿入中の自動折り返しを日本語に対応させる
 set formatoptions+=mm
 
-"Macでバックスペースを使えるようにする
-set backspace=indent,eol,start
-
 " タイトルを表示
 set title
 set tabstop=2
@@ -281,13 +278,29 @@ set tags=~/tags
 "yankring用
 helptags ~/myvim/.vim/doc/
 
-"clang-format用設定
-"Mac
-map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
-imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
-"Ubuntu
-""map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
-""imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
+"OS毎の設定"
+if system("uname")=="Darwin\n"
+    " UNIX環境用のコード
+    "echo "This is mac"
+
+    "clang-format用設定
+    map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
+    imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
+elseif has('unix')
+    " Mac用のコード
+    echo "This is unix"
+
+    "Macでバックスペースを使えるようにする
+    set backspace=indent,eol,start
+
+
+ 
+    "clang-format用設定
+    map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
+    imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
+elseif has("win32")
+    " Windows環境用のコード
+endif
 
 
 
