@@ -299,6 +299,13 @@ elseif system("uname")=="Linux\n"
     "clang-format用設定
     map <C-K> :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
     imap <C-K> <c-o>:pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
+
+    "日本語入力をノーマルモードでオフにする
+    function! ImInActivate()
+      call system('fcitx-remote -c')
+    endfunction
+    inoremap <silent> <C-[> <ESC>:call ImInActivate()<CR>
+
 elseif has("win32")
     " Windows環境用のコード
 endif
