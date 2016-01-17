@@ -59,6 +59,7 @@ NeoBundle 'AtsushiSakai/vim-ros'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'vim-scripts/Align'
 NeoBundle 'vim-scripts/YankRing.vim'
+NeoBundle 'vim-scripts/grep.vim'
 
 "C++"
 NeoBundleLazy 'vim-scripts/DoxygenToolkit.vim',{
@@ -174,22 +175,13 @@ nnoremap - <C-x>
 "検索時に大文字を含んでいたら大/小を区別
 set ignorecase smartcase
 
-".svn,.gitはgrepしない 内部grepのみ
+"======Grep関連関連======"
+
+".svn,.gitはgrepしない 外部grepのみ
 set grepprg=grep\ -rnih\ --exclude-dir=.svn\ --exclude-dir=.git
 
-" vimgrep時に自動で別のタブでquickFixを開く設定
-au Quickfixcmdpost vimgrep | tabnew | cw
-
-" grepとタイプするだけでvimgrepを使う設定
-command! -complete=file -nargs=+ G call s:grep([<f-args>])
-function! s:grep(args)
-    let target = len(a:args) > 1 ? join(a:args[1:]) : '*'
-    execute 'vimgrep' '/' . a:args[0] . '/j ' . target
-    if len(getqflist()) != 0 | copen | endif
-endfunction
-
-" grでカーソル下のキーワードをvimgrep
-nnoremap <expr> gr ':vimgrep /\<' . expand('<cword>') . '\>/j /home/komatsu/fuerte_workspace/**/*.' . expand('%:e')
+" grでカーソル下のキーワードを再帰grep
+nnoremap <expr> gr ':Rgrep<CR>'
 
 " 入力モード中に素早くjjと入力した場合はESCとみなす
 inoremap jj <Esc>
@@ -255,6 +247,14 @@ inoremap <silent> <c-[> <esc>
 "vimrcをスペースドットで開く
 nnoremap <space>. :<c-u>tabedit $MYVIMRC<CR>
 
+":Vimrcsourceでvimrcを読み込む"
+if !exists("*Vimrcsource")
+  function! Vimrcsource()
+    source ~/myvim/.vimrc
+  endfunction
+  command! Vimrcsource :call Vimrcsource()
+endif
+
 " Shift + 矢印でウィンドウサイズを変更
 nnoremap <S-Left>  <C-w><<CR>
 nnoremap <S-Right> <C-w>><CR>
@@ -280,7 +280,6 @@ set tags=~/tags
 "yankring用
 helptags ~/myvim/.vim/doc/
 
-"echo system("uname")
 "OS毎の設定"
 if system("uname")=="Darwin\n"
     " Mac環境用のコード
@@ -292,6 +291,7 @@ if system("uname")=="Darwin\n"
     "clang-format用設定
     map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
     imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
+
 elseif system("uname")=="Linux\n"
     " Linux用のコード
     "echo "This is unix"
