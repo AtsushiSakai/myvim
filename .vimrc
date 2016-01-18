@@ -278,7 +278,7 @@ au BufRead,BufNewFile *.md set filetype=markdown
 set tags=~/tags
 
 "yankring用
-helptags ~/myvim/.vim/doc/
+"helptags ~/myvim/.vim/doc/
 
 "OS毎の設定"
 if system("uname")=="Darwin\n"
@@ -308,6 +308,15 @@ elseif system("uname")=="Linux\n"
 
 elseif has("win32")
     " Windows環境用のコード
+
+    "grep.vim用にGitbashのgpreにパスを通す"
+    "Program filesのディレクトリ名の間のスペースによって
+    "おかしい挙動をしたため、エイリアスを使った"
+    let Grep_Path = 'C:\Gitbin\grep.exe' 
+    let Grep_Xargs_Path = 'C:\Gitbin\xargs.exe' 
+    let Grep_Find_Path = 'C:\Gitbin\find.exe'
+    let Grep_Shell_Quote_Char = '"'
+    
 endif
 
 "==========タブ関係===========
