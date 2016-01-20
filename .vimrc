@@ -75,9 +75,9 @@ NeoBundleLazy 'mattn/emmet-vim',{
 \}
 
 "Python"
-NeoBundleLazy 'davidhalter/jedi-vim',{
-  \"autoload" : {"filetypes" :[ "python" ]}
-\}
+" NeoBundleLazy 'davidhalter/jedi-vim',{
+  " \"autoload" : {"filetypes" :[ "python" ]}
+" \}
 
 "Markdown"
 NeoBundleLazy 'kannokanno/previm',{
@@ -177,8 +177,9 @@ set ignorecase smartcase
 
 "======Grep関連関連======"
 
-".svn,.gitはgrepしない 外部grepのみ
-set grepprg=grep\ -rnih\ --exclude-dir=.svn\ --exclude-dir=.git
+let Grep_Skip_Dirs = '.svn .git'  "無視するディレクトリ
+let Grep_Default_Options = '-I'   "バイナルファイルがgrepしない
+let Grep_Skip_Files = '*.bak *~'  "バックアップファイルを無視する
 
 " grでカーソル下のキーワードを再帰grep
 nnoremap <expr> gr ':Rgrep<CR>'
