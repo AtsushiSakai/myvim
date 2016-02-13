@@ -388,6 +388,9 @@ source ~/.vim/script/svndiffandcommit.vim
 "catkin_makeを実施するコマンドを有効化
 source ~/.vim/script/RosCatkinMake.vim
 
+"catkin_makeを実施するコマンドを有効化
+source ~/.vim/script/DecimalChange.vim
+
 " launchファイルのカラースキームをxmlと一緒にする。
 autocmd vimrc BufNewFile,BufRead *.launch set filetype=xml
 
