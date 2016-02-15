@@ -178,8 +178,9 @@ set ignorecase smartcase
 
 "======Grep関連関連======"
 
-".svn,.gitはgrepしない 外部grepのみ
-set grepprg=grep\ -rnih\ --exclude-dir=.svn\ --exclude-dir=.git
+let Grep_Skip_Dirs = '.svn .git'  "無視するディレクトリ
+let Grep_Default_Options = '-I'   "バイナルファイルがgrepしない
+let Grep_Skip_Files = '*.bak *~'  "バックアップファイルを無視する
 
 " grでカーソル下のキーワードを再帰grep
 nnoremap <expr> gr ':Rgrep<CR>'
@@ -387,6 +388,9 @@ source ~/.vim/script/svndiffandcommit.vim
 
 "catkin_makeを実施するコマンドを有効化
 source ~/.vim/script/RosCatkinMake.vim
+
+"catkin_makeを実施するコマンドを有効化
+source ~/.vim/script/DecimalChange.vim
 
 " launchファイルのカラースキームをxmlと一緒にする。
 autocmd vimrc BufNewFile,BufRead *.launch set filetype=xml
