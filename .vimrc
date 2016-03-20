@@ -9,8 +9,8 @@
 "encoding
 set encoding=utf-8
 scriptencoding utf-8 
-"set fileencoding=utf-8
-set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
+"set fileencoding=utf-8 #書き込み時のFile Encoding
+set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8 "読み込み時のEncoding
 
 "autocmd用 autocmdのすべてにautocmd vimrcとすること
 augroup vimrc
@@ -84,7 +84,6 @@ NeoBundleLazy 'kannokanno/previm',{
   \"autoload" : {"filetypes" :[ "markdown" ]}
 \}
 
-
 call neobundle#end()
 
 " Required:
@@ -93,8 +92,6 @@ filetype plugin indent on
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
 NeoBundleCheck
-
-
 
 "=====vim-heirの設定=====
 execute "highlight ucurl_my gui=undercurl guisp=Red"
@@ -319,52 +316,6 @@ elseif has("win32")
     let Grep_Shell_Quote_Char = '"'
     
 endif
-
-"==========タブ関係===========
-"Anywhere SID.
-function! s:SID_PREFIX()
-  return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
-endfunction
-
-  " Set tabline.
-function! s:my_tabline()  "{{{
-  let s = ''
-  for i in range(1, tabpagenr('$'))
-    let bufnrs = tabpagebuflist(i)
-    let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
-    let no = i  " display 0-origin tabpagenr.
-    let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
-    let title = fnamemodify(bufname(bufnr), ':t')
-    let title = '[' . title . ']'
-    let s .= '%'.i.'T'
-    let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
-    let s .= no . ':' . title
-    let s .= mod
-    let s .= '%#TabLineFill# '
-  endfor
-  let s .= '%#TabLineFill#%T%=%#TabLine#'
-  return s
-endfunction "}}}
-let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
-set showtabline=2 " 常にタブラインを表示
-
-" The prefix key.
-nnoremap    [Tag]   <Nop>
-nmap t [Tag]
-" Tab jump
-for n in range(1, 9)
-    execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
-endfor
-" t1 で1番左のタブ、t2 で1番左から2番目のタブにジャンプ
-
-map <silent> [Tag]c :tablast <bar> tabnew ./<CR>
-" tc 新しいタブを一番右に作る
-map <silent> [Tag]x :tabclose<CR>
-" tx タブを閉じる
-map <silent> [Tag]n :tabnext<CR>
-" tn 次のタブ
-map <silent> [Tag]p :tabprevious<CR>
-" tp 前のタブ
 
 " Octave用のスクリプト
 source ~/.vim/script/octave.vim
