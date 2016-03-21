@@ -78,6 +78,7 @@ NeoBundleLazy 'mattn/emmet-vim',{
 " NeoBundleLazy 'davidhalter/jedi-vim',{
   " \"autoload" : {"filetypes" :[ "python" ]}
 " \}
+nmap <F5> :!python %
 
 "Markdown"
 NeoBundleLazy 'kannokanno/previm',{
