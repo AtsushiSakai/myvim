@@ -172,6 +172,10 @@ set ignorecase smartcase
 
 "======Grep関連関連======"
 
+if executable('jvgrep')
+  set grepprg=jvgrep
+endif
+
 let Grep_Skip_Dirs = '.svn .git'  "無視するディレクトリ
 let Grep_Default_Options = '-I'   "バイナルファイルがgrepしない
 let Grep_Skip_Files = '*.bak *~'  "バックアップファイルを無視する
