@@ -60,6 +60,7 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'vim-scripts/Align'
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'vim-scripts/grep.vim'
+NeoBundle "ctrlpvim/ctrlp.vim"
 
 "C++"
 NeoBundleLazy 'vim-scripts/DoxygenToolkit.vim',{
@@ -158,7 +159,7 @@ set ttymouse=xterm2
 set history=5000
 
 "ペースト時に階段上にしない。
-set pastetoggle=
+set paste
 
 set hidden              " バッファを閉じる代わりに隠す（Undo履歴を残すため）
 set switchbuf=useopen   " 新しく開く代わりにすでに開いてあるバッファを開く
@@ -166,14 +167,14 @@ set switchbuf=useopen   " 新しく開く代わりにすでに開いてあるバ
 "シンタックスオン
 syntax on
 
-" 数字のインクリメントとデクリメントを分かりやすく
-nnoremap + <C-a>
-nnoremap - <C-x>
-
 "検索時に大文字を含んでいたら大/小を区別
 set ignorecase smartcase
 
 "======Grep関連関連======"
+
+if executable('jvgrep')
+  set grepprg=jvgrep
+endif
 
 let Grep_Skip_Dirs = '.svn .git'  "無視するディレクトリ
 let Grep_Default_Options = '-I'   "バイナルファイルがgrepしない
@@ -200,7 +201,8 @@ set matchtime=3 "表示時間の設定
 "バックアップファイル系
 set backup
 set backupdir=~/.vim/backup/
-set directory=~/.vim/backup/
+set undofile
+set undodir=~/.vim/undo/
 set noswapfile
 
 "プログラムの行数を表示
@@ -327,9 +329,6 @@ elseif has("win32")
     let Grep_Shell_Quote_Char = '"'
     
 endif
-
-" Octave用のスクリプト
-source ~/.vim/script/octave.vim
 
 "========ROS=======
 "gf用
