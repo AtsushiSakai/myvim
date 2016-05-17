@@ -18,8 +18,6 @@ Vim enviroment files for ROS
 
 # How to use
 
-## RosTopicList
-
 
 ## RosCatkinMake
 
