@@ -1,5 +1,5 @@
 "
-" @brief Decimal Change
+" @brief Translate
 "
 " @author Atsushi Sakai
 "
