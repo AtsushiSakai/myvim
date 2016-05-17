@@ -287,6 +287,16 @@ if system("uname")=="Darwin\n"
     "Macでバックスペースを使えるようにする
     set backspace=indent,eol,start
 
+    " Mac の辞書.appで開く {{{
+    " 引数に渡したワードを検索
+    command! -nargs=1 MacDict      call system('open '.shellescape('dict://'.<q-args>))
+    " カーソル下のワードを検索
+    command! -nargs=0 MacDictCWord call system('open '.shellescape('dict://'.shellescape(expand('<cword>'))))
+    " 辞書.app を閉じる
+    command! -nargs=0 MacDictClose call system("osascript -e 'tell application \"Dictionary\" to quit'")
+    " 辞書にフォーカスを当てる
+    command! -nargs=0 MacDictFocus call system("osascript -e 'tell application \"Dictionary\" to activate'")
+
     "clang-format用設定
     map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
     imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
