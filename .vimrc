@@ -11,8 +11,8 @@ let g:myvimrcpath="C:/Users/km60728/myvim"
 "encoding
 set encoding=utf-8
 scriptencoding utf-8 
-"set fileencoding=utf-8
-set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
+"set fileencoding=utf-8 #書き込み時のFile Encoding
+set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8 "読み込み時のEncoding
 
 "autocmd用 autocmdのすべてにautocmd vimrcとすること
 augroup vimrc
@@ -62,6 +62,7 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'vim-scripts/Align'
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'vim-scripts/grep.vim'
+NeoBundle "ctrlpvim/ctrlp.vim"
 
 "C++"
 NeoBundleLazy 'vim-scripts/DoxygenToolkit.vim',{
@@ -87,7 +88,6 @@ NeoBundleLazy 'kannokanno/previm',{
   \"autoload" : {"filetypes" :[ "markdown" ]}
 \}
 
-
 call neobundle#end()
 
 " Required:
@@ -96,8 +96,6 @@ filetype plugin indent on
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
 NeoBundleCheck
-
-
 
 "=====vim-heirの設定=====
 execute "highlight ucurl_my gui=undercurl guisp=Red"
@@ -163,7 +161,7 @@ set ttymouse=xterm2
 set history=5000
 
 "ペースト時に階段上にしない。
-set pastetoggle=
+set paste
 
 set hidden              " バッファを閉じる代わりに隠す（Undo履歴を残すため）
 set switchbuf=useopen   " 新しく開く代わりにすでに開いてあるバッファを開く
@@ -171,14 +169,14 @@ set switchbuf=useopen   " 新しく開く代わりにすでに開いてあるバ
 "シンタックスオン
 syntax on
 
-" 数字のインクリメントとデクリメントを分かりやすく
-nnoremap + <C-a>
-nnoremap - <C-x>
-
 "検索時に大文字を含んでいたら大/小を区別
 set ignorecase smartcase
 
 "======Grep関連関連======"
+
+if executable('jvgrep')
+  set grepprg=jvgrep
+endif
 
 let Grep_Skip_Dirs = '.svn .git'  "無視するディレクトリ
 let Grep_Default_Options = '-I'   "バイナルファイルがgrepしない
@@ -205,7 +203,8 @@ set matchtime=3 "表示時間の設定
 "バックアップファイル系
 set backup
 set backupdir=~/.vim/backup/
-set directory=~/.vim/backup/
+set undofile
+set undodir=~/.vim/undo/
 set noswapfile
 
 "プログラムの行数を表示
@@ -292,6 +291,16 @@ if system("uname")=="Darwin\n"
     "Macでバックスペースを使えるようにする
     set backspace=indent,eol,start
 
+    " Mac の辞書.appで開く {{{
+    " 引数に渡したワードを検索
+    command! -nargs=1 MacDict      call system('open '.shellescape('dict://'.<q-args>))
+    " カーソル下のワードを検索
+    command! -nargs=0 MacDictCWord call system('open '.shellescape('dict://'.shellescape(expand('<cword>'))))
+    " 辞書.app を閉じる
+    command! -nargs=0 MacDictClose call system("osascript -e 'tell application \"Dictionary\" to quit'")
+    " 辞書にフォーカスを当てる
+    command! -nargs=0 MacDictFocus call system("osascript -e 'tell application \"Dictionary\" to activate'")
+
     "clang-format用設定
     map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
     imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
@@ -322,55 +331,6 @@ elseif has("win32")
     let Grep_Shell_Quote_Char = '"'
     
 endif
-
-"==========タブ関係===========
-"Anywhere SID.
-function! s:SID_PREFIX()
-  return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
-endfunction
-
-  " Set tabline.
-function! s:my_tabline()  "{{{
-  let s = ''
-  for i in range(1, tabpagenr('$'))
-    let bufnrs = tabpagebuflist(i)
-    let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
-    let no = i  " display 0-origin tabpagenr.
-    let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
-    let title = fnamemodify(bufname(bufnr), ':t')
-    let title = '[' . title . ']'
-    let s .= '%'.i.'T'
-    let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
-    let s .= no . ':' . title
-    let s .= mod
-    let s .= '%#TabLineFill# '
-  endfor
-  let s .= '%#TabLineFill#%T%=%#TabLine#'
-  return s
-endfunction "}}}
-let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
-set showtabline=2 " 常にタブラインを表示
-
-" The prefix key.
-nnoremap    [Tag]   <Nop>
-nmap t [Tag]
-" Tab jump
-for n in range(1, 9)
-    execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
-endfor
-" t1 で1番左のタブ、t2 で1番左から2番目のタブにジャンプ
-
-map <silent> [Tag]c :tablast <bar> tabnew ./<CR>
-" tc 新しいタブを一番右に作る
-map <silent> [Tag]x :tabclose<CR>
-" tx タブを閉じる
-map <silent> [Tag]n :tabnext<CR>
-" tn 次のタブ
-map <silent> [Tag]p :tabprevious<CR>
-" tp 前のタブ
-
-" Octave用のスクリプト
-source ~/.vim/script/octave.vim
 
 "========ROS=======
 "gf用

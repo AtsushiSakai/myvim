@@ -10,4 +10,4 @@
 Session.vim
 .netrwhist
 *~
-
+.vim/undo/*
