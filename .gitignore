@@ -1,5 +1,5 @@
 #Gitで管理しないファイルの設定 A.Sakai
-
+*.pyc
 .vim/backup/*~
 .vim/bundle/*
 .DS_Store

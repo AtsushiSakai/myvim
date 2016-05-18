@@ -6,7 +6,8 @@
 "Author: Atsushi Sakai
 "
 "
-let g:myvimrcpath="C:/Users/km60728/myvim"
+
+let g:win_myvimpath="C:/Users/km60728/myvim/"
 
 "encoding
 set encoding=utf-8
@@ -329,7 +330,8 @@ elseif has("win32")
     let Grep_Xargs_Path = 'C:\Gitbin\xargs.exe' 
     let Grep_Find_Path = 'C:\Gitbin\find.exe'
     let Grep_Shell_Quote_Char = '"'
-    
+
+    let g:myvimpath=g:win_myvimpath
 endif
 
 "========ROS=======
@@ -354,6 +356,9 @@ source ~/.vim/script/RosCatkinMake.vim
 "catkin_makeを実施するコマンドを有効化
 source ~/.vim/script/DecimalChange.vim
 
+"Translateコマンド
+source ~/.vim/script/Translate.vim
+
 " launchファイルのカラースキームをxmlと一緒にする。
 autocmd vimrc BufNewFile,BufRead *.launch set filetype=xml
 
@@ -363,19 +368,3 @@ autocmd vimrc FileType srv colorscheme molokai
 "gvimのCdCurrentを設定 "
 command! -nargs=0 CdCurrent cd %:p:h
 
-function! Translate(arg)
-let l:arg=a:arg
-python << EOF
-import vim
-import sys
-path = unicode(vim.eval("g:myvimrcpath"),'utf-8')
-sys.path.append(path+'.vim/script')#フルパスである必要がある
-import Translate
-var = vim.eval("l:arg")
-output=Translate.translate(var)
-print(output)
-EOF
-endfunction
-
-" Command enable
-command! -nargs=* Translate :call Translate(<f-args>)
