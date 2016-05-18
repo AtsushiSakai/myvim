@@ -5,6 +5,8 @@
 "
 "Author: Atsushi Sakai
 "
+"
+let g:myvimrcpath="C:/Users/km60728/myvim"
 
 "encoding
 set encoding=utf-8
@@ -400,3 +402,20 @@ autocmd vimrc FileType srv colorscheme molokai
 
 "gvimのCdCurrentを設定 "
 command! -nargs=0 CdCurrent cd %:p:h
+
+function! Translate(arg)
+let l:arg=a:arg
+python << EOF
+import vim
+import sys
+path = unicode(vim.eval("g:myvimrcpath"),'utf-8')
+sys.path.append(path+'.vim/script')#フルパスである必要がある
+import Translate
+var = vim.eval("l:arg")
+output=Translate.translate(var)
+print(output)
+EOF
+endfunction
+
+" Command enable
+command! -nargs=* Translate :call Translate(<f-args>)
