@@ -110,6 +110,9 @@ vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
 nmap <Leader>a <Plug>(EasyAlign)
 
+"CtrlPの設定
+let g:ctrlp_cmd = 'CtrlPMixed'
+
 "======neocomplcacheの設定
 " 補完ウィンドウの設定
 set completeopt=menuone
