@@ -9,6 +9,7 @@
 
 let g:win_myvimpath="C:/Users/km60728/myvim/"
 let g:mac_myvimpath="/Users/AtsushiSakai/myvim/"
+let g:linux_myvimpath="/home/atsushi/myvim/"
 
 "encoding
 set encoding=utf-8
@@ -316,10 +317,11 @@ elseif system("uname")=="Linux\n"
     " Linux用のコード
     "echo "This is unix"
 
+    let g:myvimpath=g:linux_myvimpath
+
     "clang-format用設定
     map <C-K> :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
     imap <C-K> <c-o>:pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
-
     "日本語入力をノーマルモードでオフにする
     function! ImInActivate()
       call system('fcitx-remote -c')
