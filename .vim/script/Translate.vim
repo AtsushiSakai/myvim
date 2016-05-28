@@ -9,7 +9,7 @@
 
 function! Translate(arg)
 let l:arg=a:arg
-"echo g:myvimpath
+" echo g:myvimpath
 python << EOF
 import vim
 import sys

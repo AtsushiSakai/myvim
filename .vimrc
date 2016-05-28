@@ -7,8 +7,10 @@
 "
 "
 
+"myvim pathの設定
+let g:myvimpath=$HOME."/myvim/"
+
 let g:win_myvimpath="C:/Users/km60728/myvim/"
-let g:mac_myvimpath="/Users/AtsushiSakai/myvim/"
 let g:linux_myvimpath="/home/atsushi/myvim/"
 
 "encoding
@@ -296,8 +298,6 @@ if system("uname")=="Darwin\n"
 
     "Macでバックスペースを使えるようにする
     set backspace=indent,eol,start
-
-    let g:myvimpath=g:mac_myvimpath
 
     " Mac の辞書.appで開く {{{
     " 引数に渡したワードを検索
