@@ -367,6 +367,9 @@ source ~/.vim/script/DecimalChange.vim
 "Translateコマンド
 source ~/.vim/script/Translate.vim
 
+"Cppコマンド
+source ~/.vim/script/ComfortableCpp.vim
+
 " launchファイルのカラースキームをxmlと一緒にする。
 autocmd vimrc BufNewFile,BufRead *.launch set filetype=xml
 
