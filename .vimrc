@@ -10,9 +10,6 @@
 "myvim pathの設定
 let g:myvimpath=$HOME."/myvim/"
 
-let g:win_myvimpath="C:/Users/km60728/myvim/"
-let g:linux_myvimpath="/home/atsushi/myvim/"
-
 "encoding
 set encoding=utf-8
 scriptencoding utf-8 
@@ -316,8 +313,6 @@ if system("uname")=="Darwin\n"
 elseif system("uname")=="Linux\n"
     " Linux用のコード
     "echo "This is unix"
-
-    let g:myvimpath=g:linux_myvimpath
 
     "clang-format用設定
     map <C-K> :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
