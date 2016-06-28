@@ -65,6 +65,9 @@ NeoBundle 'vim-scripts/Align'
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'vim-scripts/grep.vim'
 NeoBundle "ctrlpvim/ctrlp.vim"
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'ConradIrwin/vim-bracketed-paste'
 
 "C++"
 NeoBundleLazy 'vim-scripts/DoxygenToolkit.vim',{
@@ -124,6 +127,28 @@ let g:neocomplcache_enable_smart_case = 1
 inoremap <expr><tab> pumvisible() ? "\<Down>" : "\<TAB>"
 inoremap <expr><s-tab> pumvisible() ? "\<Up>" : "\<S-TAB>"
 
+"=====neosnippet=====
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/snippets/,~/.vim/snippets'
+
+
 "nerdcommenter用 cc でコメントorコメントアウト
 let NERDSpaceDelims = 1
 nmap cc <Plug>NERDCommenterToggle
@@ -166,7 +191,7 @@ set ttymouse=xterm2
 set history=5000
 
 "ペースト時に階段上にしない。
-set paste
+" set paste
 
 set hidden              " バッファを閉じる代わりに隠す（Undo履歴を残すため）
 set switchbuf=useopen   " 新しく開く代わりにすでに開いてあるバッファを開く
@@ -307,16 +332,17 @@ if system("uname")=="Darwin\n"
     command! -nargs=0 MacDictFocus call system("osascript -e 'tell application \"Dictionary\" to activate'")
 
     "clang-format用設定
-    map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
-    imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
+    " map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
+    " imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
 
 elseif system("uname")=="Linux\n"
     " Linux用のコード
     "echo "This is unix"
 
     "clang-format用設定
-    map <C-K> :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
-    imap <C-K> <c-o>:pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
+    " map <C-K> :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
+    " imap <C-K> <c-o>:pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
+
     "日本語入力をノーマルモードでオフにする
     function! ImInActivate()
       call system('fcitx-remote -c')
