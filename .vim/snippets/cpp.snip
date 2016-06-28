@@ -1,8 +1,8 @@
-snippet     initialfile
-abbr        * @file kvaser.h
+snippet     headerlib
+abbr        * @file .h
 options     head
     /** 
-     * @file kvaser.h
+     * @file `expand("%:r")`.h
      * @brief 
      * @author Atsushi Sakai
      */
@@ -11,9 +11,9 @@ options     head
     /** 
      * @brief 
      */
-    class {
+    class `expand("%:r")`{
       public:
-        (){}
+        `expand("%:r")`(){}
      
         //~~~~~~functions~~~~~~~
      
