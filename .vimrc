@@ -68,6 +68,7 @@ NeoBundle "ctrlpvim/ctrlp.vim"
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'ConradIrwin/vim-bracketed-paste'
+NeoBundle 'tpope/vim-fugitive'
 
 "C++"
 NeoBundleLazy 'vim-scripts/DoxygenToolkit.vim',{
@@ -158,6 +159,7 @@ vmap cc <Plug>NERDCommenterToggle
 nnoremap <space><space> :<c-u>MRU<CR>
 
 set nofoldenable    " disable folding
+
 
 "========================
 " 括弧などの自動補完
@@ -399,4 +401,9 @@ autocmd vimrc FileType srv colorscheme molokai
 
 "gvimのCdCurrentを設定 "
 command! -nargs=0 CdCurrent cd %:p:h
+
+" Statuslineの設定
+set laststatus=2
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ \[ENC=%{&fileencoding}]%P 
+
 
