@@ -7,14 +7,14 @@
 "
 "
 
-"myvim pathの設定
-let g:myvimpath=$HOME."/myvim/"
-
 "encoding
 set encoding=utf-8
 scriptencoding utf-8 
 "set fileencoding=utf-8 #書き込み時のFile Encoding
 set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8 "読み込み時のEncoding
+
+"myvim pathの設定
+let g:myvimpath = $HOME . "/myvim/"
 
 "autocmd用 autocmdのすべてにautocmd vimrcとすること
 augroup vimrc
