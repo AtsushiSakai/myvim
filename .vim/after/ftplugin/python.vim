@@ -37,3 +37,5 @@ endfunction
 " Shift + F でautopep自動修正
 nnoremap <S-f> :call Autopep8()<CR>
 
+autocmd BufWrite *.{py} :call Autopep8()
+
