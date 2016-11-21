@@ -1,6 +1,6 @@
 # What is this
 
-Vim enviroment files for ROS 
+My vim enviroment
 
 # Install
 
@@ -15,17 +15,6 @@ Vim enviroment files for ROS
 3 Install neobundle
 
 > git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-
-# How to use
-
-
-## RosCatkinMake
-
-
-## RosMsgShow
-
-![RosMsgShowgif](http://f.st-hatena.com/images/fotolife/m/meison_amsl/20150608/20150608224238.gif?1433770958)
-
 
 
 # Detailed description in Japanese
