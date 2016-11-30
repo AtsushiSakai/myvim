@@ -14,7 +14,7 @@ set fileencoding=utf-8 "書き込み時のFile Encoding
 " set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8 "読み込み時のEncoding
 
 "myvim pathの設定
-let g:myvimpath = $HOME . "/myvim/"
+let g:myvimpath = $HOME . '/myvim/'
 
 "autocmd用 autocmdのすべてにautocmd vimrcとすること
 augroup vimrc
@@ -84,9 +84,14 @@ NeoBundleLazy 'mattn/emmet-vim',{
 \}
 
 "Python"
-" NeoBundleLazy 'davidhalter/jedi-vim',{
-  " \"autoload" : {"filetypes" :[ "python" ]}
-" \}
+NeoBundleLazy 'davidhalter/jedi-vim',{
+  \"autoload" : {"filetypes" :[ "python" ]}
+\}
+ 
+NeoBundleLazy 'andviro/flake8-vim',{
+  \"autoload" : {"filetypes" :[ "python" ]}
+\}
+
 nmap <F5> :!python %
 
 "Markdown"
@@ -104,8 +109,8 @@ filetype plugin indent on
 NeoBundleCheck
 
 "=====vim-heirの設定=====
-execute "highlight ucurl_my gui=undercurl guisp=Red"
-let g:hier_highlight_group_qf = "ucurl_my"
+execute 'highlight ucurl_my gui=undercurl guisp=Red'
+let g:hier_highlight_group_qf = 'ucurl_my'
 
 "=====vim-easy-alignの設定=====
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
@@ -124,7 +129,7 @@ set completeopt=menuone
 let g:neocomplcache_enable_at_startup = 1
 " 大文字が入力されるまで大文字小文字の区別を無視する
 let g:neocomplcache_enable_smart_case = 1
-""tabで補完候補の選択を行う
+"tabで補完候補の選択を行う
 inoremap <expr><tab> pumvisible() ? "\<Down>" : "\<TAB>"
 inoremap <expr><s-tab> pumvisible() ? "\<Up>" : "\<S-TAB>"
 
@@ -262,11 +267,11 @@ set shiftwidth=2
 set expandtab
 
 "クリップボード共有
-if has("clipboard") 
+if has('clipboard') 
   vmap ,y "+y 
   nmap ,p "+gp 
   " exclude:{pattern} must be last ^= prepend += append 
-  if has("gui_running") || has("xterm_clipboard") 
+  if has('gui_running') || has('xterm_clipboard') 
     silent! set clipboard^=unnamedplus 
     set clipboard^=unnamed 
   endif 
@@ -283,7 +288,7 @@ inoremap <silent> <c-[> <esc>
 nnoremap <space>. :<c-u>tabedit $MYVIMRC<CR>
 
 ":Vimrcsourceでvimrcを読み込む"
-if !exists("*Vimrcsource")
+if !exists('*Vimrcsource')
   function! Vimrcsource()
     source ~/myvim/.vimrc
   endfunction
@@ -315,10 +320,10 @@ set tags=~/tags
 "yankring用
 "helptags ~/myvim/.vim/doc/
 
-"OS毎の設定"
-if system("uname")=="Darwin\n"
+"OS毎の設定
+if system('uname')==?'Darwin\n'
     " Mac環境用のコード
-    "echo "This is mac"
+    "echo 'This is mac'
 
     "Macでバックスペースを使えるようにする
     set backspace=indent,eol,start
@@ -337,9 +342,9 @@ if system("uname")=="Darwin\n"
     " map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
     " imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
 
-elseif system("uname")=="Linux\n"
+elseif system('uname')==?'Linux\n'
     " Linux用のコード
-    "echo "This is unix"
+    "echo 'This is unix'
 
     "clang-format用設定
     " map <C-K> :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
@@ -351,7 +356,7 @@ elseif system("uname")=="Linux\n"
     endfunction
     inoremap <silent> <C-[> <ESC>:call ImInActivate()<CR>
 
-elseif has("win32")
+elseif has('win32')
     " Windows環境用のコード
 
     "grep.vim用にGitbashのgpreにパスを通す"
@@ -368,8 +373,8 @@ endif
 "========ROS=======
 "gf用
 "gfでROSのヘッダファイルに移動できるようにした。
-let $V_ROS_ROOT="/opt/ros/fuerte/include"
-let $V_ROS_TOOLS="~/fuerte_workspace/Tools/"
+let $V_ROS_ROOT='/opt/ros/fuerte/include'
+let $V_ROS_TOOLS='~/fuerte_workspace/Tools/'
 set path+=$V_ROS_ROOT+$V_ROS_TOOLS
 
 "ROSのトピックのリストを表示するコマンドを有効にする
