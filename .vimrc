@@ -321,9 +321,9 @@ set tags=~/tags
 "helptags ~/myvim/.vim/doc/
 
 "OS毎の設定
-if system('uname')==?'Darwin\n'
+if stridx(system('uname'),'Dar')!=-1
     " Mac環境用のコード
-    "echo 'This is mac'
+    " echo 'This is mac'
 
     "Macでバックスペースを使えるようにする
     set backspace=indent,eol,start
@@ -342,9 +342,9 @@ if system('uname')==?'Darwin\n'
     " map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
     " imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
 
-elseif system('uname')==?'Linux\n'
+elseif stridx(system('uname'),'Linu')!=-1
     " Linux用のコード
-    "echo 'This is unix'
+    " echo 'This is unix'
 
     "clang-format用設定
     " map <C-K> :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
@@ -358,6 +358,7 @@ elseif system('uname')==?'Linux\n'
 
 elseif has('win32')
     " Windows環境用のコード
+    " echo 'This is win32'
 
     "grep.vim用にGitbashのgpreにパスを通す"
     "Program filesのディレクトリ名の間のスペースによって
