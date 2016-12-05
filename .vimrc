@@ -122,6 +122,9 @@ nmap <Leader>a <Plug>(EasyAlign)
 "CtrlPの設定
 let g:ctrlp_cmd = 'CtrlPMixed'
 
+"w!!でsudoで保存"
+cabbr w!! w !sudo tee > /dev/null %
+
 "======neocomplcacheの設定
 " 補完ウィンドウの設定
 set completeopt=menuone
