@@ -58,7 +58,6 @@ NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'yegappan/mru'
 NeoBundleLazy 'mopp/layoutplugin.vim', { 'autoload' : { 'commands' : 'LayoutPlugin'} }
 NeoBundle 'AtsushiSakai/bookmarklet.vim'
-NeoBundle 'AtsushiSakai/comfortablecpp.vim'
 NeoBundle 'AtsushiSakai/vim-ros'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'vim-scripts/Align'
@@ -77,6 +76,10 @@ NeoBundleLazy 'vim-scripts/DoxygenToolkit.vim',{
 NeoBundleLazy 'AtsushiSakai/comfortablecpp.vim',{
   \"autoload" : {"filetypes" :[ "cpp" ]}
 \}
+NeoBundleLazy 'justmao945/vim-clang',{
+  \"autoload" : {"filetypes" :[ "cpp" ]}
+\}
+
 
 "html"
 NeoBundleLazy 'mattn/emmet-vim',{
