@@ -62,6 +62,7 @@ NeoBundle 'vim-scripts/grep.vim'
 NeoBundle "ctrlpvim/ctrlp.vim"
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Shougo/neoinclude.vim'
 NeoBundle 'ConradIrwin/vim-bracketed-paste'
 NeoBundle 'tpope/vim-fugitive'
 
