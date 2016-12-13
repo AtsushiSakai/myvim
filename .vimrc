@@ -50,13 +50,9 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 "追加したらNeoBundleInstallすること
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'https://github.com/vim-scripts/SingleCompile'
-NeoBundle 'cohama/vim-hier'
 NeoBundle 'ompugao/ros.vim'
-NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'yegappan/mru'
-NeoBundleLazy 'mopp/layoutplugin.vim', { 'autoload' : { 'commands' : 'LayoutPlugin'} }
 NeoBundle 'AtsushiSakai/bookmarklet.vim'
 NeoBundle 'AtsushiSakai/vim-ros'
 NeoBundle 'tpope/vim-surround'

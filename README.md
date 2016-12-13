@@ -6,7 +6,7 @@ My vim enviroment
 
 1　Checkout software
 
-> git clone https://gist.github.com/8822390.git ~
+> git clone git@github.com:AtsushiSakai/myvim.git ~
 
 2 Create symboric links
 
@@ -22,7 +22,4 @@ My vim enviroment
 * [仕事を1.5倍ぐらい早くするVim設定 - MY ENIGMA](http://d.hatena.ne.jp/meison_amsl/20120403/1333452345)
 
 * [おすすめVimプラグイン - MY ENIGMA](http://d.hatena.ne.jp/meison_amsl/20141219)
-
-* [ROS用のVim設定 - MyEnigma](http://myenigma.hatenablog.com/entry/20141129/1417248480)
-
 
