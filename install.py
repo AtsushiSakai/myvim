@@ -10,10 +10,17 @@ import subprocess
 
 
 def main():
-    print("mvim install start!!")
+    print("myvim install start!!")
 
     clone_myvim()
+    set_symbolic_links()
     clone_neobundle()
+
+
+def set_symbolic_links():
+    print("[set_symbolic_links]")
+    cmd = "ln -s ~/myvim/.vimrc ~/.vimrc ~/myvim/.vim ~/.vim"
+    subprocess.call(cmd, shell=True)
 
 
 def clone_neobundle():

@@ -4,6 +4,12 @@ My vim enviroment
 
 # Install
 
+## install script
+
+> $ https://raw.github.com/AtsushiSakai/myvim/master/install.py | python  
+
+## Manual
+
 1　Checkout software
 
 > git clone git@github.com:AtsushiSakai/myvim.git ~
