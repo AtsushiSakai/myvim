@@ -10,7 +10,7 @@ import subprocess
 
 
 def main():
-    print("dotfiles install start!!")
+    print("mvim install start!!")
 
     clone_myvim()
     clone_neobundle()
