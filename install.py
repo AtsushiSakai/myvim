@@ -24,7 +24,7 @@ def clone_neobundle():
 
 def clone_myvim():
     print("[clone_myvim]")
-    cmd = "git clone git@github.com:AtsushiSakai/myvim.git ~"
+    cmd = "git clone git@github.com:AtsushiSakai/myvim.git ~/myvim/"
     subprocess.call(cmd, shell=True)
 
 
