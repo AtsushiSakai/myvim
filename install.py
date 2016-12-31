@@ -19,7 +19,9 @@ def main():
 
 def set_symbolic_links():
     print("[set_symbolic_links]")
-    cmd = "ln -s ~/myvim/.vimrc ~/.vimrc ~/myvim/.vim ~/.vim"
+    cmd = "ln -s ~/myvim/.vimrc ~/.vimrc"
+    subprocess.call(cmd, shell=True)
+    cmd = "ln -s ~/myvim/.vim ~/.vim"
     subprocess.call(cmd, shell=True)
     time.sleep(3.0)
 
