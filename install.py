@@ -21,18 +21,21 @@ def set_symbolic_links():
     print("[set_symbolic_links]")
     cmd = "ln -s ~/myvim/.vimrc ~/.vimrc ~/myvim/.vim ~/.vim"
     subprocess.call(cmd, shell=True)
+    raw_input()
 
 
 def clone_neobundle():
     print("[clone_neobundle]")
     cmd = "git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim"
     subprocess.call(cmd, shell=True)
+    raw_input()
 
 
 def clone_myvim():
     print("[clone_myvim]")
     cmd = "git clone git@github.com:AtsushiSakai/myvim.git ~/myvim/"
     subprocess.call(cmd, shell=True)
+    raw_input()
 
 
 if __name__ == '__main__':

@@ -6,7 +6,7 @@ My vim enviroment
 
 ## install script
 
-> $ https://raw.github.com/AtsushiSakai/myvim/master/install.py | python  
+> $ curl -fsSL https://raw.github.com/AtsushiSakai/myvim/master/install.py | python 
 
 ## Manual
 
