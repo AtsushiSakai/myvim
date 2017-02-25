@@ -65,6 +65,7 @@ NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neoinclude.vim'
 NeoBundle 'ConradIrwin/vim-bracketed-paste'
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'simeji/winresizer'
 
 "C++"
 NeoBundleLazy 'vim-scripts/DoxygenToolkit.vim',{
@@ -229,12 +230,12 @@ nnoremap <expr> gr ':Rgrep<CR>'
 inoremap jj <Esc>
 
 " 検索後にジャンプした際に検索単語を画面中央に持ってくる
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap * *zz
-nnoremap # #zz
-nnoremap g* g*zz
-nnoremap g# g#zz
+" nnoremap n nzz
+" nnoremap N Nzz
+" nnoremap * *zz
+" nnoremap # #zz
+" nnoremap g* g*zz
+" nnoremap g# g#zz
 
 " 閉じ括弧を表示した時に，対応する括弧を表示する
 set showmatch

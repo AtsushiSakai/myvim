@@ -5,8 +5,8 @@
 " setting auto clang formatting at file saving"
 function! s:clang_format()
   let now_line = line(".")
-  exec ":%! clang-format"
-  exec ":" . now_line
+  " exec ":%! clang-format"
+  " exec ":" . now_line
 endfunction
 
 if executable('clang-format')
