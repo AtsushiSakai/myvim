@@ -6,6 +6,10 @@
 nmap <F5> :!python %
 " windows"
 "nmap <F5> :!python %<CR>
+"
+
+" flask8-vim"
+let g:PyFlakeDisabledMessages = 'E402' " import order error
 
 " autopep 
 " original http://stackoverflow.com/questions/12374200/using-uncrustify-with-vim/15513829#15513829
@@ -31,7 +35,7 @@ endfunction
 
 function! Autopep8()
     "--ignote=E501: 一行の長さの補正を無視"
-    call Preserve(':silent %!autopep8 --ignore=E501 -')
+    call Preserve(':silent %!autopep8 --ignore errors=E501 -')
 endfunction
 
 " Shift + F でautopep自動修正
