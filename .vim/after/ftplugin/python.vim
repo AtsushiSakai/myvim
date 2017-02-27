@@ -35,8 +35,10 @@ endfunction
 
 function! Autopep8()
     "--ignote=E501: 一行の長さの補正を無視"
-    call Preserve(':silent %!autopep8 --ignore errors=E501 -')
+    " call Preserve(':silent %!autopep8 --ignore errors=E501 -')
+    call Preserve(':silent %!autopep8 --ignore errors=E501 --aggressive --aggressive -')
 endfunction
+    call Preserve(':silent %!autopep8 --ignore errors=E501 -')
 
 " Shift + F でautopep自動修正
 nnoremap <S-f> :call Autopep8()<CR>

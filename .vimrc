@@ -74,9 +74,9 @@ NeoBundleLazy 'vim-scripts/DoxygenToolkit.vim',{
 NeoBundleLazy 'AtsushiSakai/comfortablecpp.vim',{
   \"autoload" : {"filetypes" :[ "cpp" ]}
 \}
-" NeoBundleLazy 'justmao945/vim-clang',{
-  " \"autoload" : {"filetypes" :[ "cpp" ]}
-" \}
+NeoBundleLazy 'justmao945/vim-clang',{
+  \"autoload" : {"filetypes" :[ "cpp" ]}
+\}
 
 
 "html"
