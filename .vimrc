@@ -57,7 +57,6 @@ NeoBundle 'AtsushiSakai/bookmarklet.vim'
 NeoBundle 'AtsushiSakai/vim-ros'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'vim-scripts/Align'
-NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'vim-scripts/grep.vim'
 NeoBundle "ctrlpvim/ctrlp.vim"
 NeoBundle 'Shougo/neosnippet'
@@ -66,6 +65,9 @@ NeoBundle 'Shougo/neoinclude.vim'
 NeoBundle 'ConradIrwin/vim-bracketed-paste'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'simeji/winresizer'
+NeoBundle 'Shougo/vimshell.vim'
+NeoBundle 'Shougo/vimproc'
+NeoBundle 'vim-scripts/YankRing.vim'
 
 "C++"
 NeoBundleLazy 'vim-scripts/DoxygenToolkit.vim',{
@@ -125,6 +127,9 @@ let g:ctrlp_cmd = 'CtrlPMixed'
 
 "w!!でsudoで保存"
 cabbr w!! w !sudo tee > /dev/null %
+
+"==== yankring 
+nmap <C+p> :YRShow<CR>
 
 "======neocomplcacheの設定
 " 補完ウィンドウの設定
@@ -299,12 +304,6 @@ if !exists('*Vimrcsource')
   command! Vimrcsource :call Vimrcsource()
 endif
 
-" Shift + 矢印でウィンドウサイズを変更
-nnoremap <S-Left>  <C-w><<CR>
-nnoremap <S-Right> <C-w>><CR>
-nnoremap <S-Up>    <C-w>-<CR>
-nnoremap <S-Down>  <C-w>+<CR>
-
 "colorscheme darkblue
 " launchファイルのカラースキームをxmlと一緒にする。
 autocmd vimrc Bufnewfile,bufread *.launch set filetype=xml
@@ -320,9 +319,6 @@ au BufRead,BufNewFile *.md set filetype=markdown
 
 "ctags関係
 set tags=~/tags
-
-"yankring用
-"helptags ~/myvim/.vim/doc/
 
 "OS毎の設定
 if stridx(system('uname'),'Dar')!=-1
