@@ -67,7 +67,7 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'simeji/winresizer'
 NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'Shougo/vimproc'
-NeoBundle 'vim-scripts/YankRing.vim'
+" NeoBundle 'vim-scripts/YankRing.vim'
 
 "C++"
 NeoBundleLazy 'vim-scripts/DoxygenToolkit.vim',{
@@ -127,9 +127,6 @@ let g:ctrlp_cmd = 'CtrlPMixed'
 
 "w!!でsudoで保存"
 cabbr w!! w !sudo tee > /dev/null %
-
-"==== yankring 
-nmap <C+p> :YRShow<CR>
 
 "======neocomplcacheの設定
 " 補完ウィンドウの設定
@@ -407,6 +404,9 @@ autocmd vimrc FileType srv colorscheme molokai
 
 "gvimのCdCurrentを設定 "
 command! -nargs=0 CdCurrent cd %:p:h
+
+" Open finder
+command! Open !Open .
 
 " Statuslineの設定
 set laststatus=2
