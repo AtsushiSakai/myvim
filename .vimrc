@@ -95,7 +95,6 @@ NeoBundleLazy 'andviro/flake8-vim',{
   \"autoload" : {"filetypes" :[ "python" ]}
 \}
 
-nmap <F5> :!python %
 
 "Markdown"
 NeoBundleLazy 'kannokanno/previm',{
@@ -144,6 +143,25 @@ inoremap <expr><s-tab> pumvisible() ? "\<Up>" : "\<S-TAB>"
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+"<F5> でコード実行
+function! Exe()
+  echo "Exe"
+  let filename = expand('%:t')
+  echo filename
+  if stridx(filename, ".py") != -1 
+    !python %
+  elseif stridx(filename, ".cpp") != -1 
+    !./build_run.sh
+  else
+    echo "unknown filetype"+filename
+  endif
+endfunction
+command! Exe :call Exe()
+
+nmap <F5> :Exe
+
+
 
 " SuperTab like snippets behavior.
 "imap <expr><TAB>
