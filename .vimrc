@@ -76,10 +76,6 @@ NeoBundleLazy 'vim-scripts/DoxygenToolkit.vim',{
 NeoBundleLazy 'AtsushiSakai/comfortablecpp.vim',{
   \"autoload" : {"filetypes" :[ "cpp" ]}
 \}
-NeoBundleLazy 'justmao945/vim-clang',{
-  \"autoload" : {"filetypes" :[ "cpp" ]}
-\}
-
 
 "html"
 NeoBundleLazy 'mattn/emmet-vim',{
@@ -249,14 +245,6 @@ nnoremap <expr> gr ':Rgrep<CR>'
 " 入力モード中に素早くjjと入力した場合はESCとみなす
 inoremap jj <Esc>
 
-" 検索後にジャンプした際に検索単語を画面中央に持ってくる
-" nnoremap n nzz
-" nnoremap N Nzz
-" nnoremap * *zz
-" nnoremap # #zz
-" nnoremap g* g*zz
-" nnoremap g# g#zz
-
 " 閉じ括弧を表示した時に，対応する括弧を表示する
 set showmatch
 set matchtime=3 "表示時間の設定
@@ -353,17 +341,9 @@ if stridx(system('uname'),'Dar')!=-1
     " 辞書にフォーカスを当てる
     command! -nargs=0 MacDictFocus call system("osascript -e 'tell application \"Dictionary\" to activate'")
 
-    "clang-format用設定
-    " map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
-    " imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
-
 elseif stridx(system('uname'),'Linu')!=-1
     " Linux用のコード
     " echo 'This is unix'
-
-    "clang-format用設定
-    " map <C-K> :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
-    " imap <C-K> <c-o>:pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
 
     "日本語入力をノーマルモードでオフにする
     function! ImInActivate()
