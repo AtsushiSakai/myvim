@@ -9,7 +9,7 @@ nmap <F5> :!python %
 "
 
 " flask8-vim"
-let g:PyFlakeDisabledMessages = 'E402' " import order error
+let g:PyFlakeDisabledMessages = 'E402,E501' " import order error, long line
 
 " autopep 
 " original http://stackoverflow.com/questions/12374200/using-uncrustify-with-vim/15513829#15513829
@@ -44,4 +44,8 @@ endfunction
 nnoremap <S-f> :call Autopep8()<CR>
 
 autocmd BufWrite *.{py} :call Autopep8()
+
+
+let g:jedi#completions_command = "<C-N>"
+let g:jedi#popup_on_dot = 0
 

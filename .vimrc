@@ -11,7 +11,7 @@
 set encoding=utf-8
 scriptencoding utf-8 
 set fileencoding=utf-8 "書き込み時のFile Encoding
-" set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8 "読み込み時のEncoding
+set fileencodings=utf-8
 
 "myvim pathの設定
 let g:myvimpath = $HOME . '/myvim/'
@@ -76,6 +76,10 @@ NeoBundleLazy 'vim-scripts/DoxygenToolkit.vim',{
 NeoBundleLazy 'AtsushiSakai/comfortablecpp.vim',{
   \"autoload" : {"filetypes" :[ "cpp" ]}
 \}
+NeoBundleLazy 'justmao945/vim-clang',{
+  \"autoload" : {"filetypes" :[ "cpp" ]}
+\}
+
 
 "html"
 NeoBundleLazy 'mattn/emmet-vim',{
@@ -217,9 +221,6 @@ set ttymouse=xterm2
 "コマンドヒストリーの履歴記憶数"
 set history=5000
 
-"ペースト時に階段上にしない。
-" set paste
-
 set hidden              " バッファを閉じる代わりに隠す（Undo履歴を残すため）
 set switchbuf=useopen   " 新しく開く代わりにすでに開いてあるバッファを開く
 
@@ -260,14 +261,10 @@ set noswapfile
 set number
 
 "自動インデント
-set autoindent
 set cindent
 
 " コマンドライン補完するときに強化されたものを使う(参照 :help wildmenu)
 set wildmenu
-
-"ルーラを表示する
-set ruler
 
 " テキスト挿入中の自動折り返しを日本語に対応させる
 set formatoptions+=mm
@@ -409,5 +406,4 @@ command! Open !Open .
 " Statuslineの設定
 set laststatus=2
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ \[ENC=%{&fileencoding}]%P 
-
 
