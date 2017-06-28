@@ -45,7 +45,6 @@ nnoremap <S-f> :call Autopep8()<CR>
 
 autocmd BufWrite *.{py} :call Autopep8()
 
-
-let g:jedi#completions_command = "<C-N>"
+" let g:jedi#completions_command = "<C-N>"
 let g:jedi#popup_on_dot = 0
 

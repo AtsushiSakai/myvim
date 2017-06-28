@@ -95,7 +95,6 @@ NeoBundleLazy 'andviro/flake8-vim',{
   \"autoload" : {"filetypes" :[ "python" ]}
 \}
 
-
 "Markdown"
 NeoBundleLazy 'kannokanno/previm',{
   \"autoload" : {"filetypes" :[ "markdown" ]}
@@ -190,7 +189,11 @@ nnoremap <space><space> :<c-u>MRU<CR>
 set nofoldenable    " disable folding
 
 
+
 "========================
+
+set binary
+
 " 括弧などの自動補完
 inoremap { {}<Left>
 inoremap [ []<Left>
@@ -224,7 +227,6 @@ set history=5000
 set hidden              " バッファを閉じる代わりに隠す（Undo履歴を残すため）
 set switchbuf=useopen   " 新しく開く代わりにすでに開いてあるバッファを開く
 
-"シンタックスオン
 syntax on
 
 "検索時に大文字を含んでいたら大/小を区別
@@ -269,10 +271,9 @@ set wildmenu
 " テキスト挿入中の自動折り返しを日本語に対応させる
 set formatoptions+=mm
 
-" タイトルを表示
 set title
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set expandtab
 
 "クリップボード共有
@@ -313,9 +314,6 @@ autocmd vimrc Bufnewfile,bufread *.{mdwn,mkd,mkdn,mark*} set filetype=xml
 
 " markdown認識用
 au BufRead,BufNewFile *.md set filetype=markdown
-
-" ファイルを保存したらエンコードをutf-8に自動変換する
-""autocmd vimrc BufWrite *.{h,cpp,msg} set fenc=utf-8
 
 "ctags関係
 set tags=~/tags
