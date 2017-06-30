@@ -186,6 +186,10 @@ vmap cc <Plug>NERDCommenterToggle
 "MRUスペースx2で過去に修正したファイルエクスプローラを起動する(MRU)
 nnoremap <space><space> :<c-u>MRU<CR>
 
+" 検索時に検索文字を真ん中に持ってくる
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
 set nofoldenable    " disable folding
 
 
