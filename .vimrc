@@ -67,7 +67,7 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'simeji/winresizer'
 NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'Shougo/vimproc'
-" NeoBundle 'vim-scripts/YankRing.vim'
+NeoBundle 'scrooloose/syntastic'
 
 "C++"
 NeoBundleLazy 'vim-scripts/DoxygenToolkit.vim',{
@@ -192,7 +192,15 @@ nnoremap N Nzzzv
 
 set nofoldenable    " disable folding
 
-
+" syntastic
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_style_error_symbol = '✗'
+let g:syntastic_style_warning_symbol = '⚠'
+let g:syntastic_auto_loc_list=1
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_python_checkers=['python', 'flake8']
 
 "========================
 
