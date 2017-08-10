@@ -64,9 +64,10 @@ NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neoinclude.vim'
 NeoBundle 'ConradIrwin/vim-bracketed-paste'
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-rhubarb'
 NeoBundle 'simeji/winresizer'
 NeoBundle 'Shougo/vimshell.vim'
-NeoBundle 'Shougo/vimproc'
+NeoBundle 'JuliaEditorSupport/julia-vim'
 
 "C++"
 NeoBundleLazy 'vim-scripts/DoxygenToolkit.vim',{
@@ -146,9 +147,10 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 function! Exe()
   echo "Exe"
   let filename = expand('%:t')
-  echo filename
   if stridx(filename, ".py") != -1 
     !python %
+  elseif stridx(filename, ".jl") != -1
+    !julia %
   elseif stridx(filename, ".cpp") != -1 
     !./build_run.sh
   else
