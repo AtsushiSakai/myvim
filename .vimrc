@@ -307,6 +307,8 @@ if !exists('*Vimrcsource')
   endfunction
   command! Vimrcsource :call Vimrcsource()
 endif
+" vimrc 保存時自動読み込み
+" autocmd BufWrite *.vimrc :call Vimrcsource()
 
 "colorscheme darkblue
 " launchファイルのカラースキームをxmlと一緒にする。
@@ -407,4 +409,31 @@ command! Open !Open .
 " Statuslineの設定
 set laststatus=2
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ \[ENC=%{&fileencoding}]%P 
+
+
+function! LintJulia()
+    " execute analyze and read ouput
+    let filepath = expand('%:p')
+    let scriptcmd = "julia -e 'using Lint;r=lintfile(\""
+    let scriptcmd = scriptcmd.filepath
+    let scriptcmd = scriptcmd."\");for m in r;println(m);end;'"
+    let message = system(scriptcmd)
+    " echo message
+
+    let errors = []
+    for l in split(message, "\n")
+        let word1 = split(l, ":")
+        let info = {'filename': word1[0]}
+        let info.lnum = split(word1[1], " ")[0]
+        let info.text = join(split(l," ")[1:-1], " ")
+        let word4 = split(l," ")[1]
+        let info.nr = word4[1:-1]
+        let info.type = word4[0]
+        call add(errors, info)
+        unlet info
+    endfor
+    call setqflist(errors, 'r')
+    cwindow
+endfunction
+command! LintJulia :call LintJulia()
 
