@@ -410,12 +410,27 @@ command! Open !Open .
 set laststatus=2
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ \[ENC=%{&fileencoding}]%P 
 
+let g:julia_lint_ignores = ["E321"]
 
 function! s:finish_julia_lint(job) abort
     echo "Julia Lint is done"
     let inputfile = "test"
     let errors = []
+    if !exists('g:julia_lint_ignores')
+        let g:julia_lint_ignores = []
+    endif
     for l in readfile(inputfile)
+
+		let fignore = 0
+        for ig in g:julia_lint_ignores
+            if stridx(l, ig) != -1
+				let fignore = 1
+			endif
+        endfor
+        if fignore == 1
+			continue
+		endif
+
         let word1 = split(l, ":")
         let info = {'filename': word1[0]}
         let info.lnum = split(word1[1], " ")[0]
