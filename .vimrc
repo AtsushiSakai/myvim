@@ -414,6 +414,12 @@ set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ \[ENC=%{&f
 function! LintJulia()
     " execute analyze and read ouput
     let filepath = expand('%:p')
+
+    if stridx(filepath, '.jl') == -1
+        echo "This is not julia code"
+        return
+    endif
+
     let scriptcmd = "julia -e 'using Lint;r=lintfile(\""
     let scriptcmd = scriptcmd.filepath
     let scriptcmd = scriptcmd."\");for m in r;println(m);end;'"
@@ -436,4 +442,36 @@ function! LintJulia()
     cwindow
 endfunction
 command! LintJulia :call LintJulia()
+
+function! s:handler(job) abort
+    echo "end"
+    let inputfile = "test"
+    let errors = []
+    for l in readfile(inputfile)
+        let word1 = split(l, ":")
+        let info = {'filename': word1[0]}
+        let info.lnum = split(word1[1], " ")[0]
+        let info.text = join(split(l," ")[1:-1], " ")
+        let word4 = split(l," ")[1]
+        let info.nr = word4[1:-1]
+        let info.type = word4[0]
+        call add(errors, info)
+        unlet info
+    endfor
+    call setqflist(errors, 'r')
+    cwindow
+endfunction
+
+function! LintJuliaJob()
+    let filepath = expand('%:p')
+    let scriptcmd = "julia -e 'using Lint;r=lintfile(\""
+    let scriptcmd = scriptcmd.filepath
+    let scriptcmd = scriptcmd."\");for m in r;println(m);end;'"
+ 
+    call setqflist([])
+    let s:job = job_start(
+    \   ["/bin/sh", "-c", scriptcmd],
+    \   {'close_cb': function('s:handler'), 'out_io': "file", 'out_name': "test"})
+endfunction
+command! LintJuliaJob :call LintJuliaJob()
 
