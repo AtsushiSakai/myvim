@@ -56,7 +56,7 @@ NeoBundle 'yegappan/mru'
 NeoBundle 'AtsushiSakai/bookmarklet.vim'
 NeoBundle 'AtsushiSakai/vim-ros'
 NeoBundle 'tpope/vim-surround'
-NeoBundle 'vim-scripts/Align'
+NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'vim-scripts/grep.vim'
 NeoBundle "ctrlpvim/ctrlp.vim"
 NeoBundle 'Shougo/neosnippet'

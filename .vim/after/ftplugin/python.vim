@@ -31,12 +31,14 @@ function! Autopep8()
     call Preserve(':silent %!autopep8 --ignore errors=E501 -')
     " call Preserve(':silent %!autopep8 --ignore errors=E501 --aggressive --aggressive -')
 endfunction
-    call Preserve(':silent %!autopep8 --ignore errors=E501 -')
 
-" Shift + F でautopep自動修正
-nnoremap <S-f> :call Autopep8()<CR>
+let re = system("autopep8")
+if stridx(re, "not found") == -1
+    " Shift + F でautopep自動修正
+    nnoremap <S-f> :call Autopep8()<CR>
 
-autocmd BufWrite *.{py} :call Autopep8()
+    autocmd BufWrite *.{py} :call Autopep8()
+endif
 
 let g:jedi#popup_on_dot = 0
 " let g:jedi#completions_command = "<C-N>"
