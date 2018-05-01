@@ -15,6 +15,7 @@ set fileencodings=utf-8
 
 "myvim pathの設定
 let g:myvimpath = $HOME . '/myvim/'
+let g:win_myvimpath = "~\myvim"
 
 "autocmd用 autocmdのすべてにautocmd vimrcとすること
 augroup vimrc
@@ -360,7 +361,7 @@ elseif stridx(system('uname'),'Linu')!=-1
     endfunction
     inoremap <silent> <C-[> <ESC>:call ImInActivate()<CR>
 
-elseif has('win32')
+elseif stridx(system('uname'),'MING')!=-1
     " Windows環境用のコード
     " echo 'This is win32'
 
@@ -372,7 +373,8 @@ elseif has('win32')
     let Grep_Find_Path = 'C:\Gitbin\find.exe'
     let Grep_Shell_Quote_Char = '"'
 
-    let g:myvimpath=g:win_myvimpath
+    "Unixのファイルの改行コードをそのままにしておく
+    autocmd vimrc BufNewFile,BufRead * edit ++ff=dos
 endif
 
 "========ROS=======
