@@ -351,6 +351,10 @@ if stridx(system('uname'),'Dar')!=-1
     " 辞書にフォーカスを当てる
     command! -nargs=0 MacDictFocus call system("osascript -e 'tell application \"Dictionary\" to activate'")
 
+    " Open finder
+    command! Open !Open .
+
+
 elseif stridx(system('uname'),'Linu')!=-1
     " Linux用のコード
     " echo 'This is unix'
@@ -360,6 +364,11 @@ elseif stridx(system('uname'),'Linu')!=-1
       call system('fcitx-remote -c')
     endfunction
     inoremap <silent> <C-[> <ESC>:call ImInActivate()<CR>
+
+    " Open finder
+    command! Open !Open .
+
+
 
 elseif stridx(system('uname'),'MING')!=-1
     " Windows環境用のコード
@@ -375,6 +384,11 @@ elseif stridx(system('uname'),'MING')!=-1
 
     "Unixのファイルの改行コードをそのままにしておく
     autocmd vimrc BufNewFile,BufRead * edit ++ff=dos
+
+    " Open finder
+    command! Open !start .
+
+
 endif
 
 "========ROS=======
@@ -413,9 +427,6 @@ autocmd vimrc FileType srv colorscheme molokai
 
 "gvimのCdCurrentを設定 "
 command! -nargs=0 CdCurrent cd %:p:h
-
-" Open finder
-command! Open !Open .
 
 " Statuslineの設定
 set laststatus=2
