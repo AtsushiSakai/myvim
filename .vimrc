@@ -15,6 +15,7 @@ set fileencodings=utf-8
 
 "myvim pathの設定
 let g:myvimpath = $HOME . '/myvim/'
+let g:win_myvimpath = "~\myvim"
 
 "autocmd用 autocmdのすべてにautocmd vimrcとすること
 augroup vimrc
@@ -350,6 +351,10 @@ if stridx(system('uname'),'Dar')!=-1
     " 辞書にフォーカスを当てる
     command! -nargs=0 MacDictFocus call system("osascript -e 'tell application \"Dictionary\" to activate'")
 
+    " Open finder
+    command! Open !Open .
+
+
 elseif stridx(system('uname'),'Linu')!=-1
     " Linux用のコード
     " echo 'This is unix'
@@ -360,7 +365,12 @@ elseif stridx(system('uname'),'Linu')!=-1
     endfunction
     inoremap <silent> <C-[> <ESC>:call ImInActivate()<CR>
 
-elseif has('win32')
+    " Open finder
+    command! Open !Open .
+
+
+
+elseif stridx(system('uname'),'MING')!=-1
     " Windows環境用のコード
     " echo 'This is win32'
 
@@ -372,7 +382,13 @@ elseif has('win32')
     let Grep_Find_Path = 'C:\Gitbin\find.exe'
     let Grep_Shell_Quote_Char = '"'
 
-    let g:myvimpath=g:win_myvimpath
+    "Unixのファイルの改行コードをそのままにしておく
+    autocmd vimrc BufNewFile,BufRead * edit ++ff=dos
+
+    " Open finder
+    command! Open !start .
+
+
 endif
 
 "========ROS=======
@@ -411,9 +427,6 @@ autocmd vimrc FileType srv colorscheme molokai
 
 "gvimのCdCurrentを設定 "
 command! -nargs=0 CdCurrent cd %:p:h
-
-" Open finder
-command! Open !Open .
 
 " Statuslineの設定
 set laststatus=2
