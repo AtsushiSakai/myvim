@@ -70,10 +70,10 @@ NeoBundle 'Shougo/vimshell.vim'
 
 "C++"
 NeoBundleLazy 'vim-scripts/DoxygenToolkit.vim',{
-  \"autoload" : {"filetypes" :[ "cpp" ]}
+  \"autoload" : {"filetypes" :[ "cpp", "c" ]}
 \}
 NeoBundleLazy 'AtsushiSakai/comfortablecpp.vim',{
-  \"autoload" : {"filetypes" :[ "cpp" ]}
+  \"autoload" : {"filetypes" :[ "cpp", "c" ]}
 \}
 NeoBundleLazy 'justmao945/vim-clang',{
   \"autoload" : {"filetypes" :[ "cpp" ]}
@@ -317,7 +317,7 @@ endif
 " vimrc 保存時自動読み込み
 " autocmd BufWrite *.vimrc :call Vimrcsource()
 
-"colorscheme darkblue
+colorscheme darkblue
 " launchファイルのカラースキームをxmlと一緒にする。
 autocmd vimrc Bufnewfile,bufread *.launch set filetype=xml
 
