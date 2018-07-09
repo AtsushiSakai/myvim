@@ -86,6 +86,8 @@ NeoBundleLazy 'mattn/emmet-vim',{
   \"autoload" : {"filetypes" :[ "html" ]}
 \}
 
+
+if has("python")
 "Python"
 NeoBundleLazy 'davidhalter/jedi-vim',{
   \"autoload" : {"filetypes" :[ "python" ]}
@@ -94,6 +96,7 @@ NeoBundleLazy 'davidhalter/jedi-vim',{
 NeoBundleLazy 'andviro/flake8-vim',{
   \"autoload" : {"filetypes" :[ "python" ]}
 \}
+endif 
 
 "Markdown"
 NeoBundleLazy 'kannokanno/previm',{
@@ -377,9 +380,9 @@ elseif stridx(system('uname'),'MING')!=-1
     "grep.vim用にGitbashのgpreにパスを通す"
     "Program filesのディレクトリ名の間のスペースによって
     "おかしい挙動をしたため、エイリアスを使った"
-    let Grep_Path = 'C:\Gitbin\grep.exe' 
-    let Grep_Xargs_Path = 'C:\Gitbin\xargs.exe' 
-    let Grep_Find_Path = 'C:\Gitbin\find.exe'
+    let Grep_Path = '/usr/bin/grep.exe' 
+    let Grep_Xargs_Path = '/usr/bin/xargs.exe' 
+    let Grep_Find_Path = '/usr/bin/find.exe'
     let Grep_Shell_Quote_Char = '"'
 
     "Unixのファイルの改行コードをそのままにしておく
