@@ -7,7 +7,7 @@
 source $VIMRUNTIME/defaults.vim
 
 "encoding
-" set encoding=utf-8
+set encoding=utf-8
 scriptencoding utf-8 
 set fileencoding=utf-8 "書き込み時のFile Encoding
 set fileencodings=utf-8
@@ -195,6 +195,8 @@ nnoremap N Nzzzv
 
 set nofoldenable    " disable folding
 
+syntax on
+
 "========================
 
 set binary
@@ -294,10 +296,9 @@ if !exists('*Vimrcsource')
   endfunction
   command! Vimrcsource :call Vimrcsource()
 endif
-" vimrc 保存時自動読み込み
-" autocmd BufWrite *.vimrc :call Vimrcsource()
 
 colorscheme darkblue
+
 " launchファイルのカラースキームをxmlと一緒にする。
 autocmd vimrc Bufnewfile,bufread *.launch set filetype=xml
 
