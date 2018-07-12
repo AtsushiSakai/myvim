@@ -1,14 +1,13 @@
 "
-"FileName: .vimrc
-"
-"Discription: vim configulation
+" vim config file
 "
 "Author: Atsushi Sakai
 "
-"
+
+source $VIMRUNTIME/defaults.vim
 
 "encoding
-set encoding=utf-8
+" set encoding=utf-8
 scriptencoding utf-8 
 set fileencoding=utf-8 "書き込み時のFile Encoding
 set fileencodings=utf-8
@@ -29,11 +28,6 @@ augroup END
 if 0 | endif
 
 if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
-
-  " Required:
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
@@ -215,8 +209,6 @@ inoremap ( ()<Left>
 inoremap " ""<Left>
 inoremap ' ''<Left>
 
-"インクリメンタルサーチ
-set incsearch
 set hlsearch
 set ignorecase
 set smartcase
@@ -225,23 +217,13 @@ set wrapscan
 " ESCを二回押すことでハイライトを消す
 nmap <silent> <Esc><Esc> :nohlsearch<CR>
 
-"コマンドを右下に表示する
-set showcmd
-
 "別ファイルで修正された場合に自動読み込み"
 set autoread
 
-"マウスの設定"
-set mouse=a
 set ttymouse=xterm2
-
-"コマンドヒストリーの履歴記憶数"
-set history=5000
 
 set hidden              " バッファを閉じる代わりに隠す（Undo履歴を残すため）
 set switchbuf=useopen   " 新しく開く代わりにすでに開いてあるバッファを開く
-
-syntax on
 
 "検索時に大文字を含んでいたら大/小を区別
 set ignorecase smartcase
@@ -278,9 +260,6 @@ set number
 
 "自動インデント
 set cindent
-
-" コマンドライン補完するときに強化されたものを使う(参照 :help wildmenu)
-set wildmenu
 
 " テキスト挿入中の自動折り返しを日本語に対応させる
 set formatoptions+=mm
@@ -340,9 +319,6 @@ set tags=~/tags
 if stridx(system('uname'),'Dar')!=-1
     " Mac環境用のコード
     " echo 'This is mac'
-
-    "Macでバックスペースを使えるようにする
-    set backspace=indent,eol,start
 
     " Mac の辞書.appで開く {{{
     " 引数に渡したワードを検索
