@@ -4,7 +4,6 @@
 "Author: Atsushi Sakai
 "
 
-source $VIMRUNTIME/defaults.vim
 
 "encoding
 set encoding=utf-8
@@ -61,7 +60,6 @@ NeoBundle 'ConradIrwin/vim-bracketed-paste'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-rhubarb'
 NeoBundle 'simeji/winresizer'
-NeoBundle 'Shougo/vimshell.vim'
 
 "C++"
 NeoBundleLazy 'vim-scripts/DoxygenToolkit.vim',{
@@ -110,6 +108,8 @@ call neobundle#end()
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
 NeoBundleCheck
+
+source $VIMRUNTIME/defaults.vim
 
 "=====vim-heirの設定=====
 execute 'highlight ucurl_my gui=undercurl guisp=Red'
@@ -195,7 +195,7 @@ nnoremap N Nzzzv
 
 set nofoldenable    " disable folding
 
-syntax on
+" syntax on
 
 "========================
 
