@@ -95,12 +95,11 @@ NeoBundleLazy 'kannokanno/previm',{
 \}
 
 "Julia"
-NeoBundle 'JuliaEditorSupport/julia-vim' "cannot work Neobundlelazy..
 
-NeoBundleLazy 'AtsushiSakai/julia.vim',{
-  \"autoload" : {"filetypes" :[ "julia" ]}
-\}
-
+" NeoBundleLazy 'AtsushiSakai/julia.vim',{
+  " \"autoload" : {"filetypes" :[ "julia" ]}
+" \}
+"
 
 call neobundle#end()
 
@@ -109,6 +108,33 @@ call neobundle#end()
 NeoBundleCheck
 
 source $VIMRUNTIME/defaults.vim
+
+"=====Set up filetype===="
+
+" launchファイルのカラースキームをxmlと一緒にする。
+autocmd vimrc Bufnewfile,bufread *.launch set filetype=xml
+
+" md as markdown, instead of modula2
+autocmd vimrc Bufnewfile,bufread *.{mdwn,mkd,mkdn,mark*} set filetype=xml
+
+autocmd vimrc bufread,BufNewFile *.jl set filetype=julia
+
+" markdown認識用
+au BufRead,BufNewFile *.md set filetype=markdown
+
+function! s:config_julia_plugin()
+    let g:julia_lint_ignores = ["E321"]
+  
+    packadd julia.vim
+    packadd julia-vim
+    syntax on
+endfunction
+
+augroup lazy-load
+  autocmd!
+  autocmd FileType julia call s:config_julia_plugin()
+augroup END
+
 
 "=====vim-heirの設定=====
 execute 'highlight ucurl_my gui=undercurl guisp=Red'
@@ -298,17 +324,6 @@ endif
 
 colorscheme darkblue
 
-" launchファイルのカラースキームをxmlと一緒にする。
-autocmd vimrc Bufnewfile,bufread *.launch set filetype=xml
-
-" md as markdown, instead of modula2
-autocmd vimrc Bufnewfile,bufread *.{mdwn,mkd,mkdn,mark*} set filetype=xml
-
-autocmd vimrc bufread,BufNewFile *.jl set filetype=julia
-
-" markdown認識用
-au BufRead,BufNewFile *.md set filetype=markdown
-
 "ctags関係
 set tags=~/tags
 
@@ -408,5 +423,4 @@ command! -nargs=0 CdCurrent cd %:p:h
 set laststatus=2
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ \[ENC=%{&fileencoding}]%P 
 
-let g:julia_lint_ignores = ["E321"]
 

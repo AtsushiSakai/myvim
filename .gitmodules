@@ -1,3 +1,9 @@
 [submodule ".vim/pack/mypackage/start/mru"]
 	path = .vim/pack/mypackage/start/mru
 	url = https://github.com/yegappan/mru
+[submodule ".vim/pack/mypackage/opt/julia-vim"]
+	path = .vim/pack/mypackage/opt/julia-vim
+	url = https://github.com/JuliaEditorSupport/julia-vim
+[submodule ".vim/pack/mypackage/opt/julia.vim"]
+	path = .vim/pack/mypackage/opt/julia.vim
+	url = https://github.com/AtsushiSakai/julia.vim
