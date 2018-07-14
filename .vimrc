@@ -45,7 +45,6 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'ompugao/ros.vim'
-NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'AtsushiSakai/bookmarklet.vim'
 NeoBundle 'AtsushiSakai/vim-ros'
 NeoBundle 'tpope/vim-surround'
@@ -207,7 +206,6 @@ let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/snippets/
 
 
 "nerdcommenter用 cc でコメントorコメントアウト
-let NERDSpaceDelims = 1
 nmap cc <Plug>NERDCommenterToggle
 vmap cc <Plug>NERDCommenterToggle
 
@@ -219,8 +217,6 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 
 set nofoldenable    " disable folding
-
-" syntax on
 
 "========================
 

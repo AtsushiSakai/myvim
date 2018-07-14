@@ -7,3 +7,6 @@
 [submodule ".vim/pack/mypackage/opt/julia.vim"]
 	path = .vim/pack/mypackage/opt/julia.vim
 	url = https://github.com/AtsushiSakai/julia.vim
+[submodule ".vim/pack/mypackage/start/nerdcommenter"]
+	path = .vim/pack/mypackage/start/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter
