@@ -44,16 +44,13 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 "追加したらNeoBundleInstallすること
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'ompugao/ros.vim'
-NeoBundle 'AtsushiSakai/bookmarklet.vim'
-NeoBundle 'AtsushiSakai/vim-ros'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'junegunn/vim-easy-align'
-NeoBundle 'vim-scripts/grep.vim'
-NeoBundle "ctrlpvim/ctrlp.vim"
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neoinclude.vim'
+NeoBundle 'ompugao/ros.vim'
+NeoBundle 'AtsushiSakai/vim-ros'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'ConradIrwin/vim-bracketed-paste'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-rhubarb'
@@ -93,12 +90,6 @@ NeoBundleLazy 'kannokanno/previm',{
   \"autoload" : {"filetypes" :[ "markdown" ]}
 \}
 
-"Julia"
-
-" NeoBundleLazy 'AtsushiSakai/julia.vim',{
-  " \"autoload" : {"filetypes" :[ "julia" ]}
-" \}
-"
 
 call neobundle#end()
 

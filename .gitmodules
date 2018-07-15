@@ -10,3 +10,6 @@
 [submodule ".vim/pack/mypackage/start/nerdcommenter"]
 	path = .vim/pack/mypackage/start/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter
+[submodule ".vim/pack/mypackage/start/grep.vim"]
+	path = .vim/pack/mypackage/start/grep.vim
+	url = https://github.com/vim-scripts/grep.vim

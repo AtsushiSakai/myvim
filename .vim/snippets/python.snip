@@ -2,15 +2,17 @@
 snippet     initialscript
 abbr        #! /usr/bin/python 
 options     head
-  #! /usr/bin/python 
-  # -*- coding: utf-8 -*- 
-  u""" 
-  ${1}
+  """ 
+
 
   author Atsushi Sakai
   """
+  def main():
+    print("start!!")
 
-	if __name__ == '__main__':
-		${0:pass}
+    print("done!!")
 
+
+  if __name__ == '__main__':
+    main()
 
